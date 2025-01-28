@@ -1,0 +1,129 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    
+    height: 100vh;
+    
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 10px 20px;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.logo img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+nav{
+    width: 100%;
+}
+
+nav ul {
+    position: absolute;
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    left: 350px;
+    top: 45px;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    background: lightgray;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.login-btn {
+    background: #FFD966;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Main Content */
+main {
+    width: 90%;
+    position: absolute;
+    text-align: center;
+    padding: 40px;
+}
+ .rotate{
+    
+    position: fixed;
+    width: 1891.51px;
+    height: 1789.73px;
+    
+    top: -766.13px;
+
+    background: linear-gradient(180deg, #FFE88B 53.17%, #E7FFD8 100%);
+    transform: rotate(34.56deg);
+    z-index: -99;
+
+
+
+}
+h1  {
+        font-family: "Jomolhari", serif;
+        font-weight: 400;
+        font-style: normal;
+        text-align: center;
+        font-size: 80;
+      }
+    
+
+
+.highlight {
+    color: #E35C38;
+}
+
+.about {
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.about h2 {
+        font-family: "Inknut Antiqua", serif;
+        font-weight: 400;
+        font-style: normal;
+      }
+
+
+.about p {
+    line-height: 1.6;
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+}
+
+footer img {
+    width: 60px;
+}
+.chatbot{
+    width: 80px;
+    height: 80px;
+}
