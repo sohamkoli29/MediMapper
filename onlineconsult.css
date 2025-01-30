@@ -1,0 +1,136 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffeb99;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px;
+    background-color: white;
+    border-radius: 0 0 40px 40px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    width: 80px;
+    height: 80px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 25px;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    padding: 12px 24px;
+    background-color: #ddd;
+    border-radius: 15px;
+    font-size: 16px;
+}
+
+.login-btn {
+    background-color: #ffcc00;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.login-btn:hover {
+    transform: scale(1.1);
+}
+
+h1, h2 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+h1 {
+    font-size: 2.2em;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Jomolhari', serif;
+    font-size: 40px;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.doctor-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 30px;
+}
+
+.doctor-card {
+    background-color: #d3d3d3;
+    padding: 20px;
+    width: 75%;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Increase font size for Doctor's Name and Experience */
+.doctor-card p {
+    font-size: 18px; /* Increased font size */
+    font-weight: bold;
+}
+
+.actions {
+    display: flex;
+    gap: 12px;
+}
+
+button {
+    border: none;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Button Colors */
+.chat {
+    background-color: #ffcc00;
+}
+
+.vc {
+    background-color: #ffcc00;
+}
+
+.review {
+    background-color: #f4a460;
+    padding: 12px 20px;
+}
+
+/* Hover Pop-Up Effect */
+button:hover {
+    transform: scale(1.15);
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.2);
+}

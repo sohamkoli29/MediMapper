@@ -1,0 +1,118 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fbe29d;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 15px;
+    border-bottom: 2px solid #ddd;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+/* Buttons Hover & Pop Effect */
+nav button, .login button, .upload-btn {
+    background: #ddd;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Pop effect on hover */
+nav button:hover, 
+.login button:hover, 
+.upload-btn:hover {
+    transform: scale(1.1);
+    background: #c5c5c5;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Pop effect on click */
+nav button:active, 
+.login button:active, 
+.upload-btn:active {
+    transform: scale(0.9);
+}
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 36px;
+    color: black;
+    font-family: 'Jomolhari', serif;
+}
+
+/* Input Box */
+.input-section input {
+    padding: 10px;
+    width: 300px;
+    font-size: 16px;
+    border: 2px solid #888;
+    border-radius: 5px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Pop effect on focus */
+.input-section input:focus {
+    transform: scale(1.05);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    outline: none;
+}
+
+/* Upload Button Section */
+.upload-section {
+    margin-top: 20px;
+}
+
+/* Hide Default File Input */
+.upload-section input[type="file"] {
+    display: none;
+}
+
+/* Output Section */
+.output-section {
+    margin-top: 20px;
+}
+
+.output-section label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.output-section textarea {
+    width: 80%;
+    height: 200px;
+    background-color: #b3b3ff;
+    border: 2px solid #666;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 16px;
+    resize: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Pop effect on hover */
+.output-section textarea:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}

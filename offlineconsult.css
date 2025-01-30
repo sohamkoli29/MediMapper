@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FBE7A1;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    width: 60px;
+    height: 60px;
+    margin-left: 10px;
+}
+
+nav {
+    display: flex;
+    gap: 15px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+nav button {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 15px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+nav button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+nav .login {
+    background-color: #FFD700;
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Jomolhari', serif;
+    font-size: 40px;
+}
+
+.search-bar {
+    display: block;
+    margin: 20px auto;
+    width: 30%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    position: relative;
+    left: 20px;
+}
+
+.doctor-list {
+    width: 80%;
+    margin: auto;
+}
+
+.doctor-card {
+    background-color: #dcdcdc;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.appointment, .review {
+    padding: 12px 18px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.appointment {
+    background-color: #FFD700;
+}
+
+.review {
+    background-color: #F28B82;
+}
+
+.appointment:hover, .review:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+

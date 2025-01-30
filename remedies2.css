@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;700&family=Playfair+Display:wght@700;900&display=swap');
+
+body {
+    font-family:'Quicksand', sans-serif ;
+    background: linear-gradient(135deg, #FFE88B,#FFE88B);
+    text-align: center;
+    padding: 20px;
+}
+
+
+
+
+
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    margin: auto;
+}
+
+/* Beautiful and inviting heading */
+h1 {
+    color: #201e25;
+    font-family: Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 600;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Input field styling with a pleasing font */
+input {
+    width: 80%;
+    padding: 10px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid #cf3180;
+    font-size: 18px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+select, button {
+    padding: 10px;
+    margin: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+}
+/* Button Styling */
+button {
+    padding: 10px;
+    margin: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+    background: #ff477e;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Added transition for both transform and box-shadow */
+}
+
+/* Hover effect: Button "pops up" */
+button:hover {
+    background: #d63384;
+    transform: translateY(-5px); /* Lifts the button upward */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Adds a shadow for depth */
+}
+
+/* Active state for when the button is clicked */
+button:active {
+    transform: translateY(2px); /* Slightly presses the button down */
+    box-shadow: 0 4px 8px rgba(223, 34, 191, 0.1); /* Reduces the shadow on click */
+}
+
+
+
+
+
+#results {
+    margin-top: 20px;
+}
+
+/* Remove bullets from unordered list */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.remedy {
+    background: #ffafbd;
+    color: white;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.remedy:hover {
+    transform: scale(1.1);
+    background: #fc6076;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}

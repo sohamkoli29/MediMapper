@@ -1,0 +1,122 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fbe29d;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 15px;
+    border-bottom: 2px solid #ddd;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+/* Navigation and Login Buttons */
+nav button, .login button {
+    background: #ddd;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect */
+nav button:hover, 
+.login button:hover {
+    transform: scale(1.1);
+    background: #c5c5c5;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Click Effect */
+nav button:active, 
+.login button:active {
+    transform: scale(0.9);
+}
+
+/* Page Title */
+.title {
+    text-align: center;
+    font-size: 42px;
+    font-family: 'Jomolhari', serif;
+    color: black;
+    margin-top: 30px;
+}
+
+/* Subtitle */
+.subtitle {
+    font-size: 22px;
+    font-weight: bold;
+    margin-left: 50px;
+}
+
+/* Pharmacy List */
+.pharmacy-list {
+    margin: 20px 50px;
+}
+
+/* Pharmacy Block */
+.pharmacy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #c4c4c4;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+/* Pharmacy Information */
+.pharmacy-info {
+    font-size: 18px;
+}
+
+/* Buttons inside Pharmacy */
+.pharmacy-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Button Styling */
+.e-prescription, .add-medicine, .rating {
+    background-color: #dba409;
+    border: none;
+    padding: 8px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    color: black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effects */
+.e-prescription:hover, 
+.add-medicine:hover, 
+.rating:hover {
+    transform: scale(1.1);
+    background: #c58608;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Click Effect */
+.e-prescription:active, 
+.add-medicine:active, 
+.rating:active {
+    transform: scale(0.9);
+}

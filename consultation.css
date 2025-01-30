@@ -1,0 +1,112 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fbe29d;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 15px;
+    border-bottom: 2px solid #ddd;
+}
+
+.logo img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+/* Navigation and Login Buttons */
+nav button, .login button {
+    background: #ddd;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover Effect */
+nav button:hover, 
+.login button:hover {
+    transform: scale(1.1);
+    background: #c5c5c5;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Click Effect */
+nav button:active, 
+.login button:active {
+    transform: scale(0.9);
+}
+
+/* Center Title */
+.title-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.title {
+    text-align: center;
+    font-size: 42px;
+    font-family: 'Jomolhari', serif; /* Apply Jomolhari Font */
+    color: black;
+    background-color: #add8e6;
+    padding: 15px 30px;
+    border-radius: 10px;
+    width: fit-content;
+}
+
+/* Consultation Buttons */
+.consultation-section {
+    display: flex;
+    justify-content: center;
+    gap: 120px; /* Increased spacing */
+    margin-top: 60px;
+}
+
+.consultation-btn {
+    background-color: #dba999;
+    border: none;
+    padding: 80px 100px;  /* Increased Button Size */
+    font-size: 30px;  /* Bigger Font */
+    font-weight: bold;
+    color: black;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Pop Effect on Hover */
+.consultation-btn:hover {
+    transform: scale(1.15);
+    background: #c58678;
+    box-shadow: 0px 7px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Click Effect */
+.consultation-btn:active {
+    transform: scale(0.95);
+}
+
+/* Support Icon */
+.support-icon {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+.support-icon img {
+    width: 80px;
+    height: 80px;
+}
