@@ -3,56 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MEDIMAPPER</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Actor&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jomolhari&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style/style.css">
+    <title>MediMapper</title>
+    <link rel="stylesheet" href="style/styleA.css">
+    <link rel="stylesheet" href="style/home.css">
 </head>
-<body><div class="rotate"> 
-</div>
+<body>
+
     <header>
         <div class="logo">
             <img src="img/main-logo.png" alt="Logo">
         </div>
         <nav>
             <ul>
-                <li><a href="#">HOME</a></li>
-                <li><a href="#">SERVICES</a></li>
-                <li><a href="#">ABOUT</a></li>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="">SERVICES</a></li>
+                <li><a href="about.html">ABOUT</a></li>
                 <li><a href="#">CONTACT US</a></li>
             </ul>
         </nav>
         <a href="login.php"><button class="login-btn">LOGIN/SIGN IN</button></a>
     </header>
 
-    <main > 
-        <h1><span class="highlight">MEDI</span>MAPPER</h1>
-
-        <section class="about">
-            <h2>About Us</h2>
-            <p>
-                We are here to make healthcare easy, affordable, and accessible for all. Whether you want to speak with a 
-                doctor, ask a health question, or order medicines, our platform will take care of everything. From online 
-                consultations with doctors to rapid health advice from our AI chatbot to getting prescriptions, all without leaving home.
-            </p>
-            <p>
-                Our platform is made available in many languages, thereby being easy and user-friendly even for slow internet areas. 
-                We are here to support every step of emergency help and provide diagnostic tests at an affordable rate.
-            </p>
-            <p>Our goal is to bring quality healthcare to your fingertips, no matter where you are.</p>
-        </section> 
+    <main>
+        <h1 class="title"><span class="red">MEDI</span>MAPPER</h1>
+        <h2 class="subtitle">Services Offered</h2>
+        
+        <div class="services-grid">
+            <button class="service-btn yellow">Consultation</button>
+            <button class="service-btn blue">Medicine Delivery</button>
+            <button class="service-btn green">Report Analysis</button>
+            <button class="service-btn light-green">Symptoms Mapper</button>
+            <button class="service-btn faded">Diagnostic Tests</button>
+            <button class="service-btn faded">Home Remedies</button>
+        </div>
     </main>
 
     <footer>
-      <a href="predict.html">
-      <img src="img/chatbot.png" class="chatbot" alt="Chatbot">
-    </a>    
+        <button class="emergency-btn">🚑 Emergency</button>
+        <div class="chatbot">🤖</div>
     </footer>
+
 </body>
 </html>

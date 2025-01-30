@@ -1,0 +1,187 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #FBE6A2;
+    text-align: center;
+}
+
+/* Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px 20px;
+    border-bottom: 2px solid black;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo img {
+    width: 60px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: black;
+    padding: 10px 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+nav ul li a:hover {
+    background: #FFD700;
+}
+
+.login-btn {
+    background: #FFC107;
+    border: 2px solid black;
+    padding: 10px 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+    background: #FFA000;
+}
+
+/* Title */
+.title {
+    font-size: 3rem;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.title .red {
+    color: red;
+}
+
+/* Subtitle */
+.subtitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
+/* Services Grid */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 250px);
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Service Buttons */
+.service-btn {
+    width: 250px;
+    height: 80px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Button Colors */
+.yellow { background: yellow; }
+.blue { background: skyblue; }
+.green { background: green; color: white; }
+.light-green { background: lightgreen; }
+
+/* Disabled Features */
+.faded {
+    background: rgba(0, 0, 0, 0.1);
+    color: gray;
+    cursor: not-allowed;
+}
+
+/* Hover Effects */
+.service-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer */
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Emergency Button */
+.emergency-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.emergency-btn:hover {
+    background: darkred;
+}
+
+/* Chatbot Icon */
+.chatbot {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-btn {
+        width: 90%;
+    }
+}
