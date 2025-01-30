@@ -21,7 +21,7 @@ $doctors_result = $conn->query($doctors_query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Dashboard</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="style/dash.css">
 </head>
 <body>
     <div class="dashboard">

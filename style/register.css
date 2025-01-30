@@ -1,0 +1,116 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Form Container */
+.form-container {
+    background: white;
+    width: 100%;
+    max-width: 400px; /* Reduced width */
+    padding: 20px; /* Reduced padding */
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Heading */
+.form-container h2 {
+    color: #007BFF;
+    margin-bottom: 20px; /* Reduced margin */
+    font-size: 20px; /* Reduced font-size */
+}
+
+/* Label Styling */
+.form-container label {
+    display: block;
+    font-size: 14px; /* Reduced font-size */
+    color: #333;
+    margin-bottom: 6px; /* Reduced margin */
+    text-align: left;
+}
+
+/* Input Fields */
+.form-container input[type="text"],
+.form-container input[type="email"],
+.form-container input[type="password"],
+.form-container input[type="number"],
+.form-container input[type="file"],
+.form-container select {
+    width: 100%;
+    padding: 10px; /* Reduced padding */
+    margin-bottom: 15px; /* Reduced margin */
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 14px; /* Reduced font-size */
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+/* Input Fields Focus */
+.form-container input[type="text"]:focus,
+.form-container input[type="email"]:focus,
+.form-container input[type="password"]:focus,
+.form-container input[type="number"]:focus,
+.form-container select:focus,
+.form-container input[type="file"]:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Doctor-Specific Fields */
+#doctor-fields {
+    display: none;
+}
+
+/* Register Button */
+.form-container button {
+    width: 100%;
+    padding: 10px; /* Reduced padding */
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px; /* Reduced font-size */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.form-container button:hover {
+    background-color: #218838;
+}
+
+/* Link for Existing Account */
+.form-container div {
+    margin-top: 10px; /* Reduced margin */
+    font-size: 12px; /* Reduced font-size */
+}
+
+.form-container a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.form-container a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile-Friendly Styles */
+@media (max-width: 600px) {
+    .form-container {
+        width: 90%;
+        padding: 15px; /* Reduced padding */
+    }
+    .form-container input,
+    .form-container select,
+    .form-container button {
+        font-size: 12px; /* Reduced font-size */
+    }
+}

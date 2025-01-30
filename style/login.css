@@ -1,0 +1,86 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #6dd5ed, #2193b0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Form Container */
+  .form-container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: 100%;
+    max-width: 350px;
+    opacity: 0;
+    transform: scale(0.8);
+    animation: popup 0.5s ease-in-out forwards;
+  }
+  
+  @keyframes popup {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  h2 {
+    margin-bottom: 15px;
+    color: #333;
+  }
+  
+  /* Input Fields */
+  label {
+    display: block;
+    font-weight: bold;
+    margin: 10px  5px;
+    text-align: left;
+  }
+  
+  input, select {
+    width: 100%;
+    padding: 10px;
+    margin-left: -15px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background: #2193b0;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    
+  }
+  
+  button:hover {
+
+    animation:popup 0.5s zoom-out ;
+    background: #176d82;
+
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 400px) {
+    .form-container {
+      width: 90%;
+    }
+  }
+  

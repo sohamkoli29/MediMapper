@@ -1,0 +1,115 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Dashboard Container */
+.dashboard {
+    background: white;
+    width: 100%;
+    max-width: 800px;
+    padding: 15px 25px;   /* Reduced padding to decrease height */
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-height: 600px;     /* Set a maximum height */
+    overflow-y: auto;      /* Add scrolling if content exceeds max-height */
+}
+
+/* Dashboard Heading */
+.dashboard h1 {
+    color: #007BFF;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.dashboard h2 {
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 25px;
+    font-size: 18px;
+}
+
+/* Appointment List */
+.appointments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Appointment Card */
+.appointment-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    border-left: 4px solid #007BFF;
+    text-align: left;
+}
+
+.appointment-card p {
+    font-size: 16px;
+    margin: 8px 0;
+    color: #333;
+}
+
+/* Status Styling */
+.appointment-card p:last-child {
+    font-weight: bold;
+    color: #007BFF;
+}
+
+/* Button Styles */
+.btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #218838;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+    .dashboard {
+        width: 90%;
+        padding: 20px;
+        max-height: 500px;  /* Adjusted max-height for smaller screens */
+    }
+
+    .appointment-card {
+        padding: 15px;
+    }
+
+    .dashboard h1 {
+        font-size: 20px;
+    }
+
+    .dashboard h2 {
+        font-size: 18px;
+    }
+
+    .appointment-card p {
+        font-size: 14px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}

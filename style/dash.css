@@ -1,0 +1,107 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+/* Dashboard Container */
+.dashboard {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Headings */
+.dashboard h1 {
+    color: #007BFF;
+    font-size: 24px;
+}
+
+.dashboard h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Doctor List Grid */
+.doctor-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    justify-content: center;
+    padding: 10px;
+}
+
+/* Doctor Card */
+.doctor-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.doctor-card:hover {
+    transform: scale(1.05);
+}
+
+/* Doctor Image */
+.doctor-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+/* Doctor Details */
+.doctor-card h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.doctor-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+/* View Profile Button */
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    background: #007BFF;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.btn:hover {
+    background: #0056b3;
+}
+
+/* Mobile Responsive */
+@media (max-width: 600px) {
+    .dashboard {
+        max-width: 90%;
+    }
+    .doctor-list {
+        grid-template-columns: 1fr;
+    }
+    .doctor-card {
+        padding: 10px;
+    }
+    .btn {
+        font-size: 13px;
+        padding: 6px 10px;
+    }
+}

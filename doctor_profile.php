@@ -29,7 +29,7 @@ if (isset($_GET['doctor_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Profile</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="style/docpro.css">
 </head>
 <body>
     <div class="profile-container">
@@ -42,5 +42,27 @@ if (isset($_GET['doctor_id'])) {
         <p>Availability: <?php echo $doctor['availability']; ?></p>
         <a href="book_appointment.php?doctor_id=<?php echo $doctor_id; ?>" class="btn">Book Appointment</a>
     </div>
+    
+    <!-- Hidden input to pass doctor_id to JavaScript -->
+    <input type="hidden" id="doctor_id" value="<?php echo $doctor_id; ?>">
+
+    <button onclick="openChat()">Chat</button>
+
+    <a href="chat.php?doctor_id=<?php echo $doctor_id; ?>">Chat with Doctor</a>
+
+    <button onclick="startVideoCall()">Video Call</button>
+
+    <script>
+    function openChat() {
+        let doctorId = document.getElementById("doctor_id").value;
+        window.location.href = "chat.html?receiver_id=" + doctorId;
+    }
+
+    function startVideoCall() {
+        let doctorId = document.getElementById("doctor_id").value;
+        window.location.href = "video_call.php?receiver_id=" + doctorId;
+    }
+    </script>
+
 </body>
 </html>

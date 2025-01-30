@@ -4,7 +4,7 @@ session_start();
 
 // Ensure the user is logged in as a doctor
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'doctor') {
-    header("Location: login.php");
+    header("Location: chat.php");
     exit();
 }
 
@@ -37,11 +37,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['complete_appointment'
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Dashboard</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="style/docdash.css">
 </head>
 <body>
     <div class="dashboard">
         <h1>Welcome to Doctor Dashboard</h1>
+        <button onclick="openChat()">Chat</button>
         <h2>Upcoming Appointments</h2>
         <div class="appointments-list">
             <?php while ($appointment = $appointments_result->fetch_assoc()) { ?>
@@ -62,5 +63,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['complete_appointment'
             <?php } ?>
         </div>
     </div>
+    <script> 
+    function openChat() {
+        window.location.href = 'patient_list.php';
+    }
+     </script>
 </body>
 </html>
