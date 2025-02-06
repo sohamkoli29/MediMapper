@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('../scripts/config.php');
 session_start();
 
 // Ensure the user is logged in as a patient
@@ -21,7 +21,7 @@ $doctors_result = $conn->query($doctors_query);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Patient Dashboard</title>
-    <link rel="stylesheet" href="style/dash.css">
+    <link rel="stylesheet" href="../style/dash.css">
 </head>
 <body>
     <div class="dashboard">
@@ -30,7 +30,7 @@ $doctors_result = $conn->query($doctors_query);
         <div class="doctor-list">
             <?php while ($doctor = $doctors_result->fetch_assoc()) { ?>
                 <div class="doctor-card">
-                    <img src="<?php echo $doctor['profile_picture']; ?>" alt="Doctor Picture">
+                <img src="<?php echo './' . $doctor['profile_picture']; ?>" alt="Doctor Picture">
                     <h3><?php echo $doctor['name']; ?></h3>
                     <p>Specialization: <?php echo $doctor['specialization']; ?></p>
                     <p>Qualification: <?php echo $doctor['qualification']; ?></p>

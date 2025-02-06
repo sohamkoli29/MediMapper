@@ -1,4 +1,4 @@
-<?php include('config.php'); ?>
+<?php include('../scripts/config.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,12 +6,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register</title>
-  <link rel="stylesheet" href="style/register.css">
+  <link rel="stylesheet" href="../style/register.css">
 </head>
 <body>
   <div class="form-container">
     <h2>Create Profile</h2>
-    <form action="register.php" method="POST" enctype="multipart/form-data">
+    <form action="../templates/register.php" method="POST" enctype="multipart/form-data">
       <label for="name">Full Name:</label>
       <input type="text" id="name" name="name" required>
 
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 
     // Handle profile picture upload
     if (!empty($_FILES['profile_picture']['name'])) {
-        $target_dir = "uploads/";
+        $target_dir = "../uploads/";
         $profile_picture = $target_dir . basename($_FILES['profile_picture']['name']);
         move_uploaded_file($_FILES['profile_picture']['tmp_name'], $profile_picture);
     }

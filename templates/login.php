@@ -1,4 +1,4 @@
-<?php include('config.php'); ?>
+<?php include('../scripts/config.php'); ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +6,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="style/login.css">
+  <link rel="stylesheet" href="../style/login.css">
 </head>
 <body>
   <div class="form-container">
@@ -25,7 +25,7 @@
       </select>
 
       <button type="submit" name="login">Login</button>
-      <div> Not having account <a href="register.php">create account</a></div>
+      <div> Not having account <a href="../templates/register.php">create account</a></div>
     </form>
   </div>
 </body>

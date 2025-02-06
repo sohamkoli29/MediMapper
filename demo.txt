@@ -1,8 +1,0 @@
-/* Group 1 */
-
-position: absolute;
-width: 821px;
-height: 57px;
-left: 303px;
-top: 89px;
-

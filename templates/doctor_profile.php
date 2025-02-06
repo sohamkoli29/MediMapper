@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('../scripts/config.php');
 session_start();
 
 // Ensure the user is logged in
@@ -29,7 +29,7 @@ if (isset($_GET['doctor_id'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Profile</title>
-    <link rel="stylesheet" href="style/docpro.css">
+    <link rel="stylesheet" href="../style/docpro.css">
 </head>
 <body>
     <div class="profile-container">

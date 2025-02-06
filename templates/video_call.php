@@ -14,7 +14,7 @@ $receiver_id = $_GET['receiver_id']; // Get doctor ID from URL
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Video Call</title>
-    <script src="video.js"></script>
+    <script src="../scripts/video.js"></script>
 </head>
 <body>
     <h2>Video Call with <?php echo ($receiver_id == 1 ? "Doctor" : "Patient"); ?></h2>

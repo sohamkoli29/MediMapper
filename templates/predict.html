@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Symptom Checker</title>
+  <link rel="stylesheet" href="../style/styleA.css">
+  <link rel="stylesheet" href="../style/predict.css">
+  
+
+</head>
+<body>
+  <header>
+    <div class="logo">
+        <img src="../img/main-logo.png" alt="Logo">
+    </div>
+    <nav>
+        <ul>
+            <li><a href="../index.html" >HOME</a></li>
+            <li><a href="">SERVICES</a></li>
+            <li><a href="about.html">ABOUT</a></li>
+            <li><a href="#">CONTACT US</a></li>
+        </ul>
+    </nav>
+    <a href="login.php"><button class="login-btn">LOGIN/SIGN IN</button></a>
+</header>
+<main>
+  <h1>Symptom Checker</h1>
+  <p>Type symptoms below and get predictions for possible diseases:</p>
+  
+  <input type="text" id="symptomInput" placeholder="Type a symptom..." autocomplete="off" />
+  <ul id="suggestions"></ul>
+  <button id="predictButton">Predict Disease</button>
+  <button id="resetButton">Reset</button>
+
+
+  <div id="results">Selected Symptoms: None</div>
+  <div id="prescriptions"></div>
+</main> 
+
+  <script src="../scripts/dataset.js"></script>
+  
+  <script src="../scripts/predict.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    
+    background: #FBE6A2;
     height: 100vh;
     
 }
@@ -67,21 +67,7 @@ main {
     text-align: center;
     padding: 40px;
 }
- .rotate{
-    
-    position: fixed;
-    width: 1891.51px;
-    height: 1789.73px;
-    
-    top: -766.13px;
 
-    background: linear-gradient(180deg, #FFE88B 53.17%, #E7FFD8 100%);
-    transform: rotate(34.56deg);
-    z-index: -99;
-
-
-
-}
 h1  {
         font-family: "Jomolhari", serif;
         font-weight: 400;

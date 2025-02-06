@@ -66,7 +66,7 @@ if ($sender_id == $receiver_id) {
     <script>
         function loadMessages() {
             $.ajax({
-                url: 'fetch_messages.php',
+                url: '../scripts/fetch_messages.php',
                 type: 'GET',
                 data: { sender_id: <?php echo $sender_id; ?>, receiver_id: <?php echo $receiver_id; ?> },
                 success: function(response) {
@@ -79,7 +79,7 @@ if ($sender_id == $receiver_id) {
             let message = $('#messageInput').val();
             if (message.trim() !== '') {
                 $.ajax({
-                    url: 'send_message.php',
+                    url: '../scripts/send_message.php',
                     type: 'POST',
                     data: { message: message, sender_id: <?php echo $sender_id; ?>, receiver_id: <?php echo $receiver_id; ?> },
                     success: function(response) {

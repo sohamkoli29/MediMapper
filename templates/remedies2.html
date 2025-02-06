@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Remedies Generator</title>
+    <link rel="stylesheet" href="../style/remedies2.css">
+    <link rel="stylesheet" href="../style/styleA.css">
+
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../img/main-logo.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="../index.html" >HOME</a></li>
+                <li><a href="">SERVICES</a></li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="#">CONTACT US</a></li>
+            </ul>
+        </nav>
+        <a href="login.php"><button class="login-btn">LOGIN/SIGN IN</button></a>
+    </header>
+    <div class="container">
+        <h1>Home Remedies Generator</h1>
+        <p>Enter your Disease to find Home Remedies:</p>
+        <input type="text" id="ailment" placeholder="Type an ailment...">
+        <button onclick="generateRemedies()">Get Remedies</button>
+        <div id="results"></div>
+        
+    </div>
+    <script src="../scripts/remedies2.js"></script>
+</body>
+</html>

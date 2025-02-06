@@ -1,5 +1,5 @@
 <?php
-include('config.php');
+include('../scripts/config.php');
 session_start();
 
 // Ensure the user is logged in as a doctor
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['complete_appointment'
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Dashboard</title>
-    <link rel="stylesheet" href="style/docdash.css">
+    <link rel="stylesheet" href="../style/docdash.css">
 </head>
 <body>
     <div class="dashboard">

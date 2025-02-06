@@ -13,53 +13,7 @@ body {
     text-align: center;
 }
 
-/* Header */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: white;
-    padding: 15px 20px;
-    border-bottom: 2px solid black;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-}
 
-.logo img {
-    width: 60px;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 15px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: black;
-    padding: 10px 15px;
-    font-weight: bold;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-nav ul li a:hover {
-    background: #FFD700;
-}
-
-.login-btn {
-    background: #FFC107;
-    border: 2px solid black;
-    padding: 10px 15px;
-    font-weight: bold;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: 0.3s;
-}
-
-.login-btn:hover {
-    background: #FFA000;
-}
 
 /* Title */
 .title {
@@ -148,9 +102,9 @@ footer {
 }
 
 /* Chatbot Icon */
-.chatbot {
-    font-size: 30px;
-    cursor: pointer;
+.chatbot{
+    width: 80px;
+    height: 80px;
 }
 
 /* Fade-in Animation */
