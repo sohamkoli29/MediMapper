@@ -6,6 +6,7 @@
     <title>MediMapper</title>
     <link rel="stylesheet" href="style/styleA.css">
     <link rel="stylesheet" href="style/home.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
 
@@ -40,8 +41,33 @@
 
     <footer>
        
-        <a href=""><div class="chatbot"><img src="img/chatbot.png"></div></a>
+        <div id="chatbot-icon" class="fixed bottom-6 right-6 cursor-pointer">
+            <img src="img/chatbot.png" alt="Chatbot" id="chatbot-btn" class="w-16 h-16 rounded-full shadow-lg transition transform hover:scale-110">
+        </div>
+    
+        <!-- Chatbot Modal -->
+        <div id="chatbot-modal" class="fixed bottom-20 right-6 w-80 bg-white shadow-2xl rounded-lg hidden">
+            <div class="p-4 border-b flex justify-between items-center bg-blue-600 text-white rounded-t-lg relative">
+                <h2 class="text-lg font-semibold">Healthcare Chatbot</h2>
+                <!-- Close button -->
+                <button class="text-xl close-btn absolute top-2 right-2">&times;</button>
+            </div>
+            <div id="chat-log" class="p-4 h-72 overflow-y-auto space-y-3">
+                <!-- Chat messages will appear here -->
+            </div>
+            <div class="p-3 border-t flex items-center gap-2 bg-gray-50 rounded-b-lg">
+                <!-- Input field with a specific width -->
+                <input type="text" id="chat-input" placeholder="Type a message..." class="w-3/4 p-2 border rounded-lg outline-none">
+                <button id="send-btn" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700">Send Message</button>
+                <button id="clear-chat-btn" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 ml-2">Clear Chat</button>
+            </div>
+        </div>
+        
+        
+        
+        
     </footer>
 
 </body>
+<script src="scripts/chatbot.js"></script>
 </html>
