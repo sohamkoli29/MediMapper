@@ -14,7 +14,7 @@ MediMapper is a web-based healthcare platform that enables patients to identify 
 
 1. **Clone the repository**  
 ```bash
-git clone https://github.com/sohamkoli29/MediMapperOg.git
+git clone https://github.com/sohamkoli29/MediMapper.git
 cd MediMapper
 ```
 
@@ -27,7 +27,7 @@ cd MediMapper
 - Move the project folder to the server's `htdocs` directory.  
 - Access the platform at:  
   ```
-  http://localhost/MediMapperOg
+  http://localhost/MediMapper
   ```
 
 ## Features
