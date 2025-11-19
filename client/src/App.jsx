@@ -18,7 +18,7 @@ import DoctorDashboard from './pages/DoctorDashboard';
 import Delivery from './pages/Delivery';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import DoctorAppointments from './pages/DoctorAppointments';
-
+import PatientAppointments from './pages/PatientAppointments';
 
 function App() {
   return (
@@ -41,7 +41,7 @@ function App() {
                 <Route path="/chat/:userId?" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
                 <Route path="/delivery" element={<ProtectedRoute><Delivery /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-
+                <Route path="/patient-appointments" element={ <ProtectedRoute><PatientAppointments /></ProtectedRoute>} />
                 {/* Doctor Routes */}
                 <Route 
                   path="/doctor-dashboard" 

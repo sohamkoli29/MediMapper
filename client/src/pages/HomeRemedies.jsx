@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Search, Leaf, Clock, AlertCircle } from 'lucide-react';
-
+import MarkdownRenderer from '../components/MarkdownRenderer'
 const HomeRemedies = () => {
   const [disease, setDisease] = useState('');
   const [remedies, setRemedies] = useState(null);
@@ -145,9 +145,9 @@ const HomeRemedies = () => {
             </div>
 
             <div className="prose max-w-none">
-              <pre className="whitespace-pre-wrap font-sans text-gray-800 bg-gray-50 p-6 rounded-lg">
-                {remedies.remedies}
-              </pre>
+          
+                <MarkdownRenderer content={remedies.remedies}/>
+     
             </div>
 
             <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">

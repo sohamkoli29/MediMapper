@@ -29,10 +29,12 @@ const Navbar = () => {
 const patientNavigation = [
   { name: 'Home', href: '/', icon: Home },
   { name: 'Consultation', href: '/consultation', icon: Stethoscope },
+  { name: 'My Appointments', href: '/patient-appointments', icon: Calendar },
   { name: 'Symptom Checker', href: '/symptom-checker', icon: Activity },
   { name: 'Report Analysis', href: '/report-analysis', icon: FileText },
   { name: 'Home Remedies', href: '/home-remedies', icon: Sprout },
   { name: 'Medicine Delivery', href: '/delivery', icon: Truck },
+  
 
 ];
 

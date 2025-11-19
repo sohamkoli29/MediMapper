@@ -1,9 +1,48 @@
 import express from 'express';
 import axios from 'axios';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const router = express.Router();
 
-// AI Symptom Checker
+// Helper function to call Gemini API
+const callGeminiAPI = async (prompt) => {
+  try {
+    const API_KEY = process.env.GEMINI_API_KEY;
+    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`;
+
+    const response = await axios.post(API_URL, {
+      contents: [{
+        parts: [{
+          text: prompt
+        }]
+      }],
+      generationConfig: {
+        temperature: 0.7,
+        topK: 40,
+        topP: 0.95,
+        maxOutputTokens: 5024,
+      }
+    }, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      timeout: 30000 // 30 seconds timeout
+    });
+
+    if (response.data && response.data.candidates && response.data.candidates[0]) {
+      return response.data.candidates[0].content.parts[0].text;
+    } else {
+      throw new Error('Invalid response from Gemini API');
+    }
+  } catch (error) {
+    console.error('Gemini API Error:', error.response?.data || error.message);
+    throw new Error(`AI service error: ${error.response?.data?.error?.message || error.message}`);
+  }
+};
+
+// AI Symptom Checker with Gemini
 router.post('/symptom-checker', async (req, res) => {
   try {
     const { symptoms } = req.body;
@@ -15,43 +54,44 @@ router.post('/symptom-checker', async (req, res) => {
       });
     }
 
-    // For now, return mock data since we don't have Gemini API key
-    // In production, you would call the Gemini API here
-    const mockResponse = `
-Predicted Disease: Common Cold
-Medicines Preferred: 
-- Paracetamol 500mg (for fever and pain)
-- Chlorpheniramine (for runny nose)
-- Guaifenesin (for cough)
+    const prompt = `
+You are an experienced medical AI assistant. The user is experiencing the following symptoms: ${symptoms.join(', ')}
 
-Recommended Actions:
-1. Get plenty of rest
-2. Drink warm fluids
-3. Use a humidifier
-4. Gargle with warm salt water
+Please provide a comprehensive analysis in the following structured format:
 
-Note: This is AI-generated advice. Please consult a doctor for proper diagnosis.
+**Possible Conditions:**
+[List 2-3 most likely medical conditions based on the symptoms, ordered by probability]
+
+**Recommended Actions:**
+[Provide specific medical advice including:
+- When to see a doctor immediately
+- Self-care measures
+- Warning signs to watch for]
+
+**Medical Disclaimer:**
+[Include a clear disclaimer that this is AI-generated advice and not a substitute for professional medical consultation]
+
+Please be concise, accurate, and focus on practical advice. Use bullet points for readability.
     `;
 
-    // Simulate API delay
-    setTimeout(() => {
-      res.json({
-        success: true,
-        analysis: mockResponse.trim(),
-        symptoms: symptoms.join(', ')
-      });
-    }, 1000);
+    const analysis = await callGeminiAPI(prompt);
+
+    res.json({
+      success: true,
+      analysis: analysis.trim(),
+      symptoms: symptoms.join(', ')
+    });
 
   } catch (error) {
     console.error('Symptom checker error:', error);
     res.status(500).json({
       success: false,
-      message: 'Internal server error in AI service'
+      message: error.message || 'Internal server error in AI service'
     });
   }
 });
 
-// Home Remedies
+// Home Remedies with Gemini
 router.post('/home-remedies', async (req, res) => {
   try {
     const { disease } = req.body;
@@ -63,51 +103,49 @@ router.post('/home-remedies', async (req, res) => {
       });
     }
 
-    // Mock response for home remedies
-    const mockRemedies = `
-Disease: ${disease}
-Ayurvedic Remedies (Step-by-Step):
-1. Drink warm water with honey and lemon
-2. Use turmeric in warm milk
-3. Practice steam inhalation with eucalyptus oil
-4. Apply ginger paste on forehead for headaches
+    const prompt = `
+You are an Ayurvedic and natural remedies expert. The user is asking for home remedies for: ${disease}
 
-Dietary Recommendations:
-- Eat light, easily digestible foods
-- Include plenty of fruits and vegetables
-- Drink herbal teas (chamomile, ginger)
-- Avoid cold and processed foods
+Please provide comprehensive natural remedies in the following structured format:
 
-Lifestyle Advice:
-- Get adequate sleep
-- Practice deep breathing exercises
-- Maintain proper hygiene
-- Stay hydrated throughout the day
+**Ayurvedic Home Remedies:**
+[Provide 3-5 specific, practical home remedies with step-by-step instructions]
 
-Disclaimer: These are general suggestions. Consult a healthcare professional for personalized advice.
+**Dietary Recommendations:**
+[Suggest foods to eat and avoid, including specific Indian dietary suggestions]
+
+**Lifestyle Modifications:**
+[Recommend daily routines, exercises, and lifestyle changes]
+
+**Precautions & Warnings:**
+[Include when to seek professional medical help and any contraindications]
+
+**Medical Disclaimer:**
+[Clearly state that these are traditional remedies and not a substitute for professional medical advice]
+
+Focus on safe, evidence-based natural remedies commonly used in Indian households.
     `;
 
-    // Simulate API delay
-    setTimeout(() => {
-      res.json({
-        success: true,
-        remedies: mockRemedies.trim()
-      });
-    }, 1000);
+    const remedies = await callGeminiAPI(prompt);
+
+    res.json({
+      success: true,
+      remedies: remedies.trim()
+    });
 
   } catch (error) {
     console.error('Home remedies error:', error);
     res.status(500).json({
       success: false,
-      message: 'Internal server error in AI service'
+      message: error.message || 'Internal server error in AI service'
     });
   }
 });
 
-// Report Analysis (Mock)
+// Report Analysis with Gemini
 router.post('/report-analysis', async (req, res) => {
   try {
-    const { reportText } = req.body;
+    const { reportText, reportType = 'general' } = req.body;
 
     if (!reportText) {
       return res.status(400).json({
@@ -116,39 +154,159 @@ router.post('/report-analysis', async (req, res) => {
       });
     }
 
-    const mockAnalysis = `
-Report Analysis Summary:
+    const prompt = `
+You are a medical analysis AI. Analyze the following medical report and provide insights:
 
-Key Findings:
-- Normal blood pressure range
-- Slightly elevated cholesterol levels
-- Healthy blood sugar levels
+Medical Report:
+${reportText}
 
-Recommendations:
-- Diet you should follow: Low-fat, high-fiber diet with plenty of vegetables
-- Medicine: Consider cholesterol medication if levels don't improve in 3 months
-- Exercise: 30 minutes of moderate exercise daily
+Please provide analysis in this structured format:
 
-Follow-up:
-- Schedule next checkup in 6 months
-- Monitor blood pressure weekly
-- Maintain healthy lifestyle habits
+**Report Summary:**
+[Brief overview of key findings]
 
-Note: This analysis is AI-generated. Please consult with your healthcare provider.
+**Key Observations:**
+[Highlight important values, patterns, or abnormalities]
+
+**Clinical Interpretation:**
+[Explain what the findings mean in simple terms]
+
+**Recommended Next Steps:**
+[Suggest specific actions including:
+- Follow-up tests if needed
+- Specialist consultations recommended
+- Lifestyle changes
+- Monitoring parameters]
+
+**Questions for Healthcare Provider:**
+[Suggest important questions the patient should ask their doctor]
+
+**Medical Disclaimer:**
+[Emphasize that this is AI analysis and professional medical consultation is essential]
+
+Focus on clarity and actionable insights. Use simple language that patients can understand.
     `;
 
-    setTimeout(() => {
-      res.json({
-        success: true,
-        analysis: mockAnalysis.trim()
-      });
-    }, 1500);
+    const analysis = await callGeminiAPI(prompt);
+
+    res.json({
+      success: true,
+      analysis: analysis.trim(),
+      reportType: reportType
+    });
 
   } catch (error) {
     console.error('Report analysis error:', error);
     res.status(500).json({
       success: false,
-      message: 'Internal server error in AI service'
+      message: error.message || 'Internal server error in AI service'
+    });
+  }
+});
+
+// New AI Chat Endpoint for General Health Queries
+router.post('/health-chat', async (req, res) => {
+  try {
+    const { message, conversationHistory = [] } = req.body;
+
+    if (!message) {
+      return res.status(400).json({
+        success: false,
+        message: 'Message is required'
+      });
+    }
+
+    // Build context from conversation history
+    const historyContext = conversationHistory
+      .map(chat => `${chat.role}: ${chat.message}`)
+      .join('\n');
+
+    const prompt = `
+You are MediMapper AI, a friendly and knowledgeable healthcare assistant. You're helping patients with their health queries.
+
+Previous conversation:
+${historyContext}
+
+Current patient question: ${message}
+
+Guidelines for your response:
+- Be empathetic and supportive
+- Provide accurate, evidence-based information
+- Suggest consulting healthcare professionals when appropriate
+- Use simple, clear language
+- Include practical advice and next steps
+- Always include a medical disclaimer
+
+Please respond helpfully while maintaining professional boundaries.
+    `;
+
+    const response = await callGeminiAPI(prompt);
+
+    res.json({
+      success: true,
+      response: response.trim(),
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    console.error('Health chat error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Internal server error in AI chat service'
+    });
+  }
+});
+
+// Mental Health Support Endpoint
+router.post('/mental-health-support', async (req, res) => {
+  try {
+    const { issue, severity = 'mild' } = req.body;
+
+    if (!issue) {
+      return res.status(400).json({
+        success: false,
+        message: 'Issue description is required'
+      });
+    }
+
+    const prompt = `
+You are a compassionate mental health first aid assistant. A user is experiencing: ${issue}
+
+Severity level: ${severity}
+
+Please provide support in this format:
+
+**Immediate Coping Strategies:**
+[Provide 3-5 practical techniques for immediate relief]
+
+**Long-term Support:**
+[Suggest ongoing practices and lifestyle changes]
+
+**Professional Resources:**
+[Recommend when and how to seek professional help]
+
+**Crisis Support:**
+[Include emergency contact information and crisis resources]
+
+**Important Note:**
+[Clearly state you're an AI and not a substitute for professional mental healthcare]
+
+Be empathetic, non-judgmental, and focus on practical, actionable support.
+    `;
+
+    const support = await callGeminiAPI(prompt);
+
+    res.json({
+      success: true,
+      support: support.trim(),
+      severity: severity
+    });
+
+  } catch (error) {
+    console.error('Mental health support error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Internal server error in mental health support service'
     });
   }
 });

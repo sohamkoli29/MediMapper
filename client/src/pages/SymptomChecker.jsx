@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Search, AlertCircle, Clock, RefreshCw } from 'lucide-react';
+import MarkdownRenderer from '../components/MarkdownRenderer';
+
 
 const SymptomChecker = () => {
   const [symptoms, setSymptoms] = useState([]);
@@ -194,9 +196,7 @@ const SymptomChecker = () => {
             </div>
 
             <div className="prose max-w-none">
-              <pre className="whitespace-pre-wrap font-sans text-gray-800">
-                {predictions.analysis}
-              </pre>
+             <MarkdownRenderer content={predictions.analysis} />
             </div>
 
             <div className="mt-6 p-4 bg-blue-50 rounded-lg">

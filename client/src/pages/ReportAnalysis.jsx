@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Upload, FileText, AlertCircle, Download } from 'lucide-react';
-
+import MarkdownRenderer from '../components/MarkdownRenderer'
 const ReportAnalysis = () => {
   const [file, setFile] = useState(null);
   const [analysis, setAnalysis] = useState(null);
@@ -217,9 +217,9 @@ const ReportAnalysis = () => {
             </div>
 
             <div className="prose max-w-none">
-              <pre className="whitespace-pre-wrap font-sans text-gray-800 bg-gray-50 p-6 rounded-lg">
-                {analysis.analysis}
-              </pre>
+              
+                <MarkdownRenderer content={analysis.analysis}/>
+           
             </div>
 
             <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
