@@ -11,6 +11,9 @@ const DoctorAppointments = () => {
     const [error, setError] = useState('');
   const [filter, setFilter] = useState('all'); // all, pending, confirmed, completed, cancelled
 
+
+      const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     if (user) {
       fetchAppointments();
@@ -30,7 +33,7 @@ const DoctorAppointments = () => {
 
   const updateAppointmentStatus = async (appointmentId, status) => {
     try {
-      await axios.patch(`/api/appointments/${appointmentId}/status`, { status });
+      await axios.patch(`${API_BASE_URL}/api/appointments/${appointmentId}/status`, { status });
       fetchAppointments(); // Refresh the list
     } catch (error) {
       console.error('Error updating appointment:', error);

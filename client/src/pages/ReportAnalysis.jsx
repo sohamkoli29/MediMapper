@@ -7,6 +7,7 @@ const ReportAnalysis = () => {
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
   const [dragActive, setDragActive] = useState(false);
+      const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleFile = (selectedFile) => {
     if (selectedFile && selectedFile.type === 'application/pdf') {
@@ -46,7 +47,7 @@ const ReportAnalysis = () => {
     try {
       // For now, we'll use mock analysis since we don't have actual PDF parsing
       // In a real app, you'd upload the file and process it on the backend
-      const response = await axios.post('/api/ai/report-analysis', {
+      const response = await axios.post(`${API_BASE_URL}/api/ai/report-analysis`, {
         reportText: 'Medical report analysis placeholder'
       });
       setAnalysis(response.data);

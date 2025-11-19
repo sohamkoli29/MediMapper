@@ -2,7 +2,7 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 
 const AuthContext = createContext();
-
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 export const useAuth = () => {
   const context = useContext(AuthContext);
   if (!context) {
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 // In client/src/contexts/AuthContext.jsx - Update the login function
 const login = async (username, password) => {  // Remove role parameter
   try {
-    const response = await axios.post('/api/auth/login', {
+    const response = await axios.post(`${API_BASE_URL}/api/auth/login`, {
       username,
       password
       // Remove role from the request
@@ -65,7 +65,7 @@ const login = async (username, password) => {  // Remove role parameter
 
   const register = async (userData) => {
     try {
-      const response = await axios.post('/api/auth/register', userData);
+      const response = await axios.post(`${API_BASE_URL}/api/auth/register`, userData);
 
       const { token: newToken, user: registeredUser } = response.data;
 

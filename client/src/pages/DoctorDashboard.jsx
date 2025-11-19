@@ -23,6 +23,7 @@ const DoctorDashboard = () => {
     todayAppointments: 0
   });
   const [loading, setLoading] = useState(true);
+      const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
     if (user) {
@@ -33,7 +34,7 @@ const DoctorDashboard = () => {
   const fetchDoctorData = async () => {
     try {
       // Fetch appointments
-      const appointmentsResponse = await axios.get(`/api/appointments/doctor/${user.id}`);
+      const appointmentsResponse = await axios.get(`${API_BASE_URL}/api/appointments/doctor/${user.id}`);
       const doctorAppointments = appointmentsResponse.data.appointments || [];
       setAppointments(doctorAppointments);
 
@@ -62,7 +63,7 @@ const DoctorDashboard = () => {
 
   const updateAppointmentStatus = async (appointmentId, status) => {
     try {
-      await axios.patch(`/api/appointments/${appointmentId}/status`, { status });
+      await axios.patch(`${API_BASE_URL}/api/appointments/${appointmentId}/status`, { status });
       // Refresh data
       fetchDoctorData();
     } catch (error) {

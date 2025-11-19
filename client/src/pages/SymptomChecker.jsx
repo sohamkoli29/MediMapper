@@ -8,6 +8,7 @@ const SymptomChecker = () => {
   const [predictions, setPredictions] = useState(null);
   const [loading, setLoading] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
+      const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   // Common symptoms for suggestions
   const commonSymptoms = [
@@ -48,7 +49,7 @@ const SymptomChecker = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('/api/ai/symptom-checker', {
+      const response = await axios.post(`${API_BASE_URL}/api/ai/symptom-checker`, {
         symptoms
       });
       setPredictions(response.data);

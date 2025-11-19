@@ -19,6 +19,8 @@ const ChatWindow = ({ receiver, onBack }) => {
   const currentUserId = user?.id || user?._id;
   const receiverId = receiver?.id || receiver?._id;
 
+
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
   useEffect(() => {
     if (socket && receiver && user && currentUserId && receiverId) {
       const chatId = getChatId(currentUserId, receiverId);
@@ -78,7 +80,7 @@ const ChatWindow = ({ receiver, onBack }) => {
     
     setLoading(true);
     try {
-      const response = await axios.get('/api/chat/history', {
+      const response = await axios.get(`${API_BASE_URL}/api/chat/history`, {
         params: {
           user1: currentUserId,
           user2: receiverId

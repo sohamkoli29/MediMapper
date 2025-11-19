@@ -21,13 +21,17 @@ const Consultation = () => {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
   const { user } = useAuth();
 
+
+    const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
+
   useEffect(() => {
     fetchDoctors();
   }, []);
 
   const fetchDoctors = async () => {
     try {
-      const response = await axios.get('/api/users/doctors');
+      const response = await axios.get(`${API_BASE_URL}/api/users/doctors`);
       setDoctors(response.data.doctors || []);
     } catch (error) {
       console.error('Error fetching doctors:', error);
@@ -51,7 +55,7 @@ const Consultation = () => {
     if (!selectedDoctor || !user) return;
 
     try {
-      const response = await axios.post('/api/appointments', {
+      const response = await axios.post(`${API_BASE_URL}/api/appointments`, {
         patientId: user.id,
         doctorId: selectedDoctor.user?._id,
         date: appointmentData.date,

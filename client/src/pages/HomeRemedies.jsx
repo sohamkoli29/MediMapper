@@ -14,6 +14,7 @@ const HomeRemedies = () => {
     'allergies', 'arthritis', 'asthma', 'back pain', 'diabetes',
     'hypertension', 'migraine', 'skin rash', 'stomach ache'
   ];
+      const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
   const handleDiseaseInput = (value) => {
     setDisease(value);
@@ -35,7 +36,7 @@ const HomeRemedies = () => {
 
     setLoading(true);
     try {
-      const response = await axios.post('/api/ai/home-remedies', {
+      const response = await axios.post(`${API_BASE_URL}/api/ai/home-remedies`, {
         disease: disease.trim()
       });
       setRemedies(response.data);

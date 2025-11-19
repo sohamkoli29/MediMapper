@@ -13,6 +13,8 @@ const Chat = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState('available');
 
+  const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     if (user) {
       fetchConversations();
@@ -25,7 +27,7 @@ const Chat = () => {
       
       if (user.role === 'patient') {
         // Patients can chat with all available doctors
-        const response = await axios.get('/api/users/doctors');
+        const response = await axios.get(`${API_BASE_URL}/api/users/doctors`);
         users = (response.data.doctors || []).map(doctor => ({
           ...doctor.user,
           id: doctor.user?._id || doctor.user?.id,
@@ -40,7 +42,7 @@ const Chat = () => {
         if (activeTab === 'available') {
           // Show all patients (for new conversations)
           try {
-            const patientsResponse = await axios.get('/api/users/patients');
+            const patientsResponse = await axios.get(`${API_BASE_URL}/api/users/patients`);
             users = (patientsResponse.data.patients || []).map(patient => ({
               ...patient,
               id: patient._id || patient.id,
@@ -51,7 +53,7 @@ const Chat = () => {
             console.error('Error fetching patients, trying fallback:', error);
             // Fallback: get all users and filter patients
             try {
-              const usersResponse = await axios.get('/api/users');
+              const usersResponse = await axios.get(`${API_BASE_URL}/api/users`);
               users = (usersResponse.data.users || [])
                 .filter(u => u.role === 'patient')
                 .map(patient => ({
@@ -68,7 +70,7 @@ const Chat = () => {
         } else {
           // Show patients from appointments
           try {
-            const appointmentsResponse = await axios.get(`/api/appointments/doctor/${user.id || user._id}`);
+            const appointmentsResponse = await axios.get(`${API_BASE_URL}/api/appointments/doctor/${user.id || user._id}`);
             const appointments = appointmentsResponse.data.appointments || [];
             
             // Extract unique patients
