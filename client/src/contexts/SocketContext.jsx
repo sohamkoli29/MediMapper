@@ -24,7 +24,7 @@ export const SocketProvider = ({ children }) => {
       console.log('Connecting to socket server...');
       
       // Connect to socket server
-       const backendUrl = import.meta.env.VITE_BACKEND_URL;
+       const backendUrl = import.meta.env.VITE_SOCKET_URL;
       const newSocket = io(backendUrl, {
         auth: {
           token: token
