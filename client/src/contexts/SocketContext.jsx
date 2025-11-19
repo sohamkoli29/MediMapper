@@ -18,12 +18,14 @@ export const SocketProvider = ({ children }) => {
   const [isConnected, setIsConnected] = useState(false);
   const { user, token } = useAuth();
 
+  
   useEffect(() => {
     if (user && token) {
       console.log('Connecting to socket server...');
       
       // Connect to socket server
-      const newSocket = io('http://localhost:5000', {
+       const backendUrl = import.meta.env.VITE_BACKEND_URL;
+      const newSocket = io(backendUrl, {
         auth: {
           token: token
         },
