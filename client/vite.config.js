@@ -12,13 +12,18 @@ export default defineConfig(({ mode }) => {
     ],
     server: {
       port: 3000,
-      proxy: {
+      // Proxy only works in development
+      proxy: mode === 'development' ? {
         '/api': {
-          target: env.VITE_BACKEND_URL ,
+          target: env.VITE_BACKEND_URL || 'http://localhost:5000',
           changeOrigin: true,
           secure: false
         }
-      }
+      } : undefined
+    },
+    build: {
+      outDir: 'dist',
+      sourcemap: false
     }
   }
 })
