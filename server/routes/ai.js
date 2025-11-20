@@ -311,4 +311,80 @@ Be empathetic, non-judgmental, and focus on practical, actionable support.
   }
 });
 
+
+// Add this route to your existing ai.js
+router.post('/expert-chat', async (req, res) => {
+  try {
+    const { message, expertType, conversationHistory = [] } = req.body;
+
+    if (!message || !expertType) {
+      return res.status(400).json({
+        success: false,
+        message: 'Message and expert type are required'
+      });
+    }
+
+    // Expert-specific prompts
+    const expertPrompts = {
+      medical: `You are an AI Medical Expert with advanced knowledge in medical diagnostics and treatment recommendations. 
+Provide accurate, evidence-based medical advice while emphasizing the importance of consulting healthcare professionals for serious conditions.
+Always include appropriate medical disclaimers.`,
+
+      ayurvedic: `You are an AI Ayurvedic Expert with deep knowledge of traditional Ayurvedic medicine, herbal remedies, dosha balance, and holistic wellness practices. 
+Provide guidance based on ancient Ayurvedic principles while emphasizing consultation with qualified practitioners for serious conditions.
+Focus on natural remedies, dietary recommendations, and lifestyle modifications.`,
+
+      nutrition: `You are an AI Nutritionist specializing in dietary planning, nutritional science, and healthy eating habits.
+Provide personalized nutrition advice, meal planning suggestions, and evidence-based dietary recommendations.
+Consider different dietary needs and preferences while emphasizing balanced nutrition.`,
+
+      mental_health: `You are an AI Mental Health Expert providing supportive counseling, coping strategies, and mental wellbeing guidance.
+Offer empathetic support, practical mental health strategies, and appropriate resources while emphasizing the importance of professional mental healthcare for serious conditions.
+Be compassionate and non-judgmental in your responses.`
+    };
+
+    const systemPrompt = expertPrompts[expertType] || expertPrompts.medical;
+
+    // Build context from conversation history
+    const historyContext = conversationHistory
+      .slice(-10)
+      .map(chat => `${chat.role}: ${chat.message}`)
+      .join('\n');
+
+    const fullPrompt = `
+${systemPrompt}
+
+Previous conversation:
+${historyContext}
+
+Current user question: ${message}
+
+Guidelines for your response:
+- Be professional and empathetic
+- Provide accurate, helpful information
+- Include appropriate disclaimers
+- Suggest professional consultation when needed
+- Use clear, understandable language
+- Keep responses concise but comprehensive
+
+Please respond helpfully:
+    `;
+
+    const response = await callGeminiAPI(fullPrompt);
+
+    res.json({
+      success: true,
+      response: response.trim(),
+      expertType,
+      timestamp: new Date().toISOString()
+    });
+
+  } catch (error) {
+    console.error('Expert chat error:', error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'Internal server error in expert chat service'
+    });
+  }
+});
 export default router;

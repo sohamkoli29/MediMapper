@@ -19,6 +19,11 @@ import Delivery from './pages/Delivery';
 import ProtectedRoute from './components/Auth/ProtectedRoute';
 import DoctorAppointments from './pages/DoctorAppointments';
 import PatientAppointments from './pages/PatientAppointments';
+import AIMedicalExpert from './pages/AIMedicalExpert';
+import AIAyurvedicExpert from './pages/AIAyurvedicExpert';
+import AINutritionist from './pages/AINutritionist';
+import AIMentalHealthExpert from './pages/AIMentalHealthExpert';
+
 
 function App() {
   return (
@@ -42,6 +47,12 @@ function App() {
                 <Route path="/delivery" element={<ProtectedRoute><Delivery /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="/patient-appointments" element={ <ProtectedRoute><PatientAppointments /></ProtectedRoute>} />
+
+                 {/* AI Expert Routes */}
+                <Route path="/ai-medical-expert" element={<AIMedicalExpert />} />
+                <Route path="/ai-ayurvedic-expert" element={<AIAyurvedicExpert />} />
+                <Route path="/ai-nutritionist" element={<AINutritionist />} />
+                <Route path="/ai-mental-health-expert" element={<AIMentalHealthExpert />} />
                 {/* Doctor Routes */}
                 <Route 
                   path="/doctor-dashboard" 

@@ -15,6 +15,7 @@ import {
   Users
 } from 'lucide-react';
 
+
 const Home = () => {
   const services = [
     {
@@ -59,25 +60,25 @@ const Home = () => {
       icon: <Stethoscope className="w-16 h-16" />,
       title: "AI Medical Expert",
       description: "Advanced medical diagnostics and treatment recommendations",
-      link: "/ai-medical"
+      link: "/ai-medical-expert"
     },
     {
       icon: <Leaf className="w-16 h-16" />,
       title: "AI Ayurvedic Expert",
       description: "Holistic health solutions based on ancient principles",
-      link: "/ai-ayurvedic"
+      link: "/ai-ayurvedic-expert"
     },
     {
       icon: <Utensils className="w-16 h-16" />,
       title: "AI Nutritionist",
       description: "Personalized diet plans and nutritional guidance",
-      link: "/ai-nutrition"
+      link: "/ai-nutritionist"
     },
     {
       icon: <Brain className="w-16 h-16" />,
       title: "AI Mental Health Expert",
       description: "Supportive counseling and mental wellbeing strategies",
-      link: "/ai-mental-health"
+      link: "/ai-mental-health-expert"
     }
   ];
 
@@ -160,28 +161,31 @@ const Home = () => {
       </section>
 
       {/* AI Experts Section */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center mb-12">AI Health Experts</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {aiExperts.map((expert, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 p-6 text-center border border-gray-100"
-              >
-                <div className="text-blue-600 mb-4 flex justify-center">
-                  {expert.icon}
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{expert.title}</h3>
-                <p className="text-gray-600 text-sm mb-4">{expert.description}</p>
-                <button className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors text-sm">
-                  Chat Now
-                </button>
-              </div>
-            ))}
+<section className="py-16 bg-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-3xl font-bold text-center mb-12">AI Health Experts</h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {aiExperts.map((expert, index) => (
+        <div
+          key={index}
+          className="bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-2 p-6 text-center border border-gray-100"
+        >
+          <div className="text-blue-600 mb-4 flex justify-center">
+            {expert.icon}
           </div>
+          <h3 className="text-lg font-semibold mb-2">{expert.title}</h3>
+          <p className="text-gray-600 text-sm mb-4">{expert.description}</p>
+          <Link 
+            to={expert.link}
+            className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition-colors text-sm inline-block"
+          >
+            Chat Now
+          </Link>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
     </div>
   );
 };
