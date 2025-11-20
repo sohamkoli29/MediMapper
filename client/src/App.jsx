@@ -23,7 +23,7 @@ import AIMedicalExpert from './pages/AIMedicalExpert';
 import AIAyurvedicExpert from './pages/AIAyurvedicExpert';
 import AINutritionist from './pages/AINutritionist';
 import AIMentalHealthExpert from './pages/AIMentalHealthExpert';
-
+import Footer from './components/Layout/Footer';
 
 function App() {
   return (
@@ -49,10 +49,39 @@ function App() {
                 <Route path="/patient-appointments" element={ <ProtectedRoute><PatientAppointments /></ProtectedRoute>} />
 
                  {/* AI Expert Routes */}
-                <Route path="/ai-medical-expert" element={<AIMedicalExpert />} />
-                <Route path="/ai-ayurvedic-expert" element={<AIAyurvedicExpert />} />
-                <Route path="/ai-nutritionist" element={<AINutritionist />} />
-                <Route path="/ai-mental-health-expert" element={<AIMentalHealthExpert />} />
+           {/* AI Expert Routes - Protected */}
+<Route 
+  path="/ai-medical-expert" 
+  element={
+    <ProtectedRoute>
+      <AIMedicalExpert />
+    </ProtectedRoute>
+  } 
+/>
+<Route 
+  path="/ai-ayurvedic-expert" 
+  element={
+    <ProtectedRoute>
+      <AIAyurvedicExpert />
+    </ProtectedRoute>
+  } 
+/>
+<Route 
+  path="/ai-nutritionist" 
+  element={
+    <ProtectedRoute>
+      <AINutritionist />
+    </ProtectedRoute>
+  } 
+/>
+<Route 
+  path="/ai-mental-health-expert" 
+  element={
+    <ProtectedRoute>
+      <AIMentalHealthExpert />
+    </ProtectedRoute>
+  } 
+/>
                 {/* Doctor Routes */}
                 <Route 
                   path="/doctor-dashboard" 
@@ -72,6 +101,7 @@ function App() {
                 />
                
               </Routes>
+              <Footer />
             </div>
           </SocketProvider>
         </AuthProvider>

@@ -112,7 +112,7 @@ const Home = () => {
           </p>
           <div className="mt-10">
             <Link
-              to="/register"
+              to="/symptom-checker"
               className="bg-white text-blue-600 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
             >
               Get Started
@@ -161,7 +161,7 @@ const Home = () => {
       </section>
 
       {/* AI Experts Section */}
-<section className="py-16 bg-white">
+<section id='ai-experts' className="py-16 bg-white">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <h2 className="text-3xl font-bold text-center mb-12">AI Health Experts</h2>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

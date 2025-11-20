@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ArrowLeft, Send, RotateCcw , Stethoscope,Leaf,Utensils,Brain} from 'lucide-react';
+import MarkdownRenderer from '../components/MarkdownRenderer'
 import { Link } from 'react-router-dom';
 
 const AIExpertChat = ({ expertConfig }) => {
@@ -248,7 +249,9 @@ const AIExpertChat = ({ expertConfig }) => {
                   : 'bg-white text-gray-800 shadow-md rounded-bl-none border border-gray-100'
               }`}
             >
-              <p className="whitespace-pre-wrap">{message.content}</p>
+              <div className="message-content">
+  <MarkdownRenderer content={message.content} />
+</div>
               <p className={`text-xs mt-1 ${
                 message.sender === 'user' ? 'text-white/80' : 'text-gray-500'
               }`}>

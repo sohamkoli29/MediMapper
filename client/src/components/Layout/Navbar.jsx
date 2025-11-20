@@ -15,7 +15,8 @@ import {
   Truck,
   MessageCircle,
   Calendar,
-  TrendingUp
+  TrendingUp,
+  Brain
 } from 'lucide-react';
 
 const Navbar = () => {
@@ -25,24 +26,22 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   // Patient navigation
-// client/src/components/Layout/Navbar.jsx - Update navigation
-const patientNavigation = [
-  { name: 'Home', href: '/', icon: Home },
-  { name: 'Consultation', href: '/consultation', icon: Stethoscope },
-  { name: 'My Appointments', href: '/patient-appointments', icon: Calendar },
-  { name: 'Symptom Checker', href: '/symptom-checker', icon: Activity },
-  { name: 'Report Analysis', href: '/report-analysis', icon: FileText },
-  { name: 'Home Remedies', href: '/home-remedies', icon: Sprout },
-  { name: 'Medicine Delivery', href: '/delivery', icon: Truck },
-  
+  const patientNavigation = [
+    { name: 'Home', href: '/', icon: Home },
+    { name: 'Consultation', href: '/consultation', icon: Stethoscope },
+    { name: 'My Appointments', href: '/patient-appointments', icon: Calendar },
+    { name: 'Symptom Checker', href: '/symptom-checker', icon: Activity },
+    { name: 'Report Analysis', href: '/report-analysis', icon: FileText },
+    { name: 'Home Remedies', href: '/home-remedies', icon: Sprout },
+    { name: 'AI Experts', href: '/#ai-experts', icon: Brain },
+    { name: 'Medicine Delivery', href: '/delivery', icon: Truck },
+  ];
 
-];
-
-const doctorNavigation = [
-  { name: 'Dashboard', href: '/doctor-dashboard', icon: TrendingUp },
-  { name: 'Appointments', href: '/doctor-appointments', icon: Calendar },
-  { name: 'Chat', href: '/chat', icon: MessageCircle }, // Add chat for doctors
-];
+  const doctorNavigation = [
+    { name: 'Dashboard', href: '/doctor-dashboard', icon: TrendingUp },
+    { name: 'Appointments', href: '/doctor-appointments', icon: Calendar },
+    { name: 'Chat', href: '/chat', icon: MessageCircle },
+  ];
 
   const navigation = user?.role === 'doctor' ? doctorNavigation : patientNavigation;
 
@@ -52,26 +51,65 @@ const doctorNavigation = [
     navigate('/');
   };
 
+  // Handle smooth scroll for hash links
+  const handleNavClick = (href, isMobile = false) => {
+    if (isMobile) {
+      setIsOpen(false);
+    }
+    
+    if (href.startsWith('/#')) {
+      // For hash links on home page
+      if (location.pathname === '/') {
+        // Already on home page, scroll to section
+        const sectionId = href.replace('/#', '');
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        // Navigate to home page with hash
+        navigate('/');
+        // Wait for navigation then scroll
+        setTimeout(() => {
+          const sectionId = href.replace('/#', '');
+          const element = document.getElementById(sectionId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100);
+      }
+    }
+  };
+
+  const isActiveLink = (href) => {
+    if (href.startsWith('/#')) {
+      // For hash links, consider active if we're on home page and hash matches
+      return location.pathname === '/' && location.hash === href.replace('/', '');
+    }
+    return location.pathname === href;
+  };
+
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Logo and main navigation */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2">
+            <Link to="/" className="flex items-center space-x-2 ml-5">
               <Stethoscope className="h-8 w-8 text-blue-600" />
               <span className="font-bold text-xl text-gray-900">MediMapper</span>
             </Link>
             
             {/* Desktop navigation */}
-            <div className="hidden md:ml-6 md:flex md:space-x-4">
+            <div className="hidden md:ml-6 md:flex md:space-x-1">
               {navigation.map((item) => {
                 const Icon = item.icon;
-                const isActive = location.pathname === item.href;
+                const isActive = isActiveLink(item.href);
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
+                    onClick={() => handleNavClick(item.href)}
                     className={`inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
                         ? 'bg-blue-100 text-blue-700'
@@ -138,12 +176,12 @@ const doctorNavigation = [
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
               {navigation.map((item) => {
                 const Icon = item.icon;
-                const isActive = location.pathname === item.href;
+                const isActive = isActiveLink(item.href);
                 return (
                   <Link
                     key={item.name}
                     to={item.href}
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => handleNavClick(item.href, true)}
                     className={`flex items-center px-3 py-2 rounded-md text-base font-medium ${
                       isActive
                         ? 'bg-blue-100 text-blue-700'
