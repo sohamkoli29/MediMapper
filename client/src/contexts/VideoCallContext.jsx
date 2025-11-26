@@ -33,6 +33,17 @@ export const VideoCallProvider = ({ children }) => {
   const [localStream, setLocalStream] = useState(null);
   const [remoteStream, setRemoteStream] = useState(null);
 
+  // Setup remote stream update callback
+  useEffect(() => {
+    webRTCService.setRemoteStreamUpdateCallback((newRemoteStream) => {
+      console.log('Remote stream updated:', newRemoteStream);
+      setRemoteStream(newRemoteStream);
+      if (callStatus !== 'connected') {
+        setCallStatus('connected');
+      }
+    });
+  }, [callStatus]);
+
   useEffect(() => {
     if (socket && user) {
       setupVideoCallListeners();
@@ -63,6 +74,13 @@ export const VideoCallProvider = ({ children }) => {
       setInCall(true);
       
       try {
+        // Set up remote stream callback BEFORE creating peer connection
+        webRTCService.setRemoteStreamUpdateCallback((newRemoteStream) => {
+          console.log('Call accepted - remote stream updated:', newRemoteStream);
+          setRemoteStream(newRemoteStream);
+          setCallStatus('connected');
+        });
+
         await webRTCService.createPeerConnection(true, data.from);
         setLocalStream(webRTCService.getLocalStream());
       } catch (error) {
@@ -88,8 +106,14 @@ export const VideoCallProvider = ({ children }) => {
     socket.on('video_call_offer', async (data) => {
       console.log('📤 Received offer from:', data.from);
       try {
+        // Set up remote stream callback BEFORE handling offer
+        webRTCService.setRemoteStreamUpdateCallback((newRemoteStream) => {
+          console.log('Offer received - remote stream updated:', newRemoteStream);
+          setRemoteStream(newRemoteStream);
+          setCallStatus('connected');
+        });
+
         await webRTCService.handleOffer(data.offer, data.from);
-        setCallStatus('connected');
       } catch (error) {
         console.error('Error handling offer:', error);
       }
@@ -100,8 +124,6 @@ export const VideoCallProvider = ({ children }) => {
       console.log('📥 Received answer from:', data.from);
       try {
         await webRTCService.handleAnswer(data.answer);
-        setCallStatus('connected');
-        setRemoteStream(webRTCService.getRemoteStream());
       } catch (error) {
         console.error('Error handling answer:', error);
       }
@@ -147,9 +169,18 @@ export const VideoCallProvider = ({ children }) => {
       setCallStatus('calling');
       
       webRTCService.setSocket(socket);
+      
+      // Initialize local stream first
       const stream = await webRTCService.initializeLocalStream();
       setLocalStream(stream);
       
+      // Set up remote stream callback
+      webRTCService.setRemoteStreamUpdateCallback((newRemoteStream) => {
+        console.log('Call initiated - remote stream updated:', newRemoteStream);
+        setRemoteStream(newRemoteStream);
+        setCallStatus('connected');
+      });
+
       socket.emit('initiate_video_call', {
         to: receiverUser.id || receiverUser._id,
         caller: {
@@ -177,9 +208,18 @@ export const VideoCallProvider = ({ children }) => {
       setReceiver(caller);
       
       webRTCService.setSocket(socket);
+      
+      // Initialize local stream
       const stream = await webRTCService.initializeLocalStream();
       setLocalStream(stream);
       
+      // Set up remote stream callback BEFORE creating peer connection
+      webRTCService.setRemoteStreamUpdateCallback((newRemoteStream) => {
+        console.log('Call accepted - remote stream updated:', newRemoteStream);
+        setRemoteStream(newRemoteStream);
+        setCallStatus('connected');
+      });
+
       await webRTCService.createPeerConnection(false, caller.id);
       
       socket.emit('accept_video_call', {

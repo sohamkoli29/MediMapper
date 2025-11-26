@@ -1,17 +1,20 @@
 // client/src/pages/Chat.jsx
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../contexts/AuthContext';
+import { useParams } from 'react-router-dom'; // Add this import
 import axios from 'axios';
 import ChatWindow from '../components/Chat/ChatWindow';
-import { Search, Users, MessageCircle, User, Stethoscope, Calendar } from 'lucide-react';
+import { Search, Users, MessageCircle, User, Stethoscope, Calendar, ArrowLeft, Menu } from 'lucide-react';
 
 const Chat = () => {
   const { user } = useAuth();
+  const { userId } = useParams(); // Get userId from URL parameters
   const [conversations, setConversations] = useState([]);
   const [selectedUser, setSelectedUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTab, setActiveTab] = useState('available');
+  const [showChat, setShowChat] = useState(false);
 
   const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -20,6 +23,53 @@ const Chat = () => {
       fetchConversations();
     }
   }, [user, activeTab]);
+
+  // Auto-select user from URL parameter when conversations are loaded
+  useEffect(() => {
+    if (userId && conversations.length > 0 && !selectedUser) {
+      const userToSelect = conversations.find(conv => 
+        conv.id === userId || conv._id === userId
+      );
+      
+      if (userToSelect) {
+        console.log('Auto-selecting user from URL:', userToSelect.name);
+        handleSelectUser(userToSelect);
+      } else {
+        console.log('User not found in conversations:', userId);
+        // If user not found in current list, try to fetch user details
+        fetchUserDetails(userId);
+      }
+    }
+  }, [userId, conversations, selectedUser]);
+
+  const fetchUserDetails = async (targetUserId) => {
+    try {
+      console.log('Fetching user details for:', targetUserId);
+      const response = await axios.get(`${API_BASE_URL}/api/users/${targetUserId}`);
+      const userData = response.data.user;
+      
+      if (userData) {
+        const userToSelect = {
+          ...userData,
+          id: userData._id || userData.id,
+          _id: userData._id || userData.id,
+          role: userData.role,
+          specialization: userData.specialization || '',
+          qualification: userData.qualification || ''
+        };
+        
+        console.log('Found user:', userToSelect.name);
+        handleSelectUser(userToSelect);
+        
+        // Add to conversations list if not already there
+        if (!conversations.some(conv => conv.id === targetUserId)) {
+          setConversations(prev => [...prev, userToSelect]);
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+    }
+  };
 
   const fetchConversations = async () => {
     try {
@@ -113,6 +163,26 @@ const Chat = () => {
       _id: conversation.id || conversation._id
     };
     setSelectedUser(selectedUserWithId);
+    
+    // On mobile, show chat view when user is selected
+    if (window.innerWidth < 768) {
+      setShowChat(true);
+    }
+    
+    // Update URL without page reload (for desktop)
+    if (window.history && window.history.replaceState) {
+      const newUrl = `/chat/${conversation.id || conversation._id}`;
+      window.history.replaceState({}, '', newUrl);
+    }
+  };
+
+  const handleBackToList = () => {
+    setShowChat(false);
+    setSelectedUser(null);
+    // Reset URL to /chat when going back to list
+    if (window.history && window.history.replaceState) {
+      window.history.replaceState({}, '', '/chat');
+    }
   };
 
   const filteredConversations = conversations.filter(conversation => {
@@ -126,8 +196,8 @@ const Chat = () => {
 
   const getRoleIcon = (role) => {
     return role === 'doctor' ? 
-      <Stethoscope className="w-4 h-4 text-blue-600" /> : 
-      <User className="w-4 h-4 text-green-600" />;
+      <Stethoscope className="w-3 h-3 sm:w-4 sm:h-4 text-blue-600" /> : 
+      <User className="w-3 h-3 sm:w-4 sm:h-4 text-green-600" />;
   };
 
   const getRoleBadge = (role) => {
@@ -146,31 +216,65 @@ const Chat = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+        <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-b-2 border-blue-600"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">Messages</h1>
-          <p className="text-gray-600 mt-2">
+    <div className="min-h-screen bg-gray-50">
+      {/* Mobile Header */}
+      <div className="md:hidden bg-white shadow-sm border-b border-gray-200">
+        <div className="flex items-center justify-between p-4">
+          {showChat ? (
+            <>
+              <button
+                onClick={handleBackToList}
+                className="flex items-center space-x-2 text-gray-600 hover:text-gray-800"
+              >
+                <ArrowLeft className="w-5 h-5" />
+                <span className="font-medium">Back</span>
+              </button>
+              <h1 className="text-lg font-semibold text-gray-900 truncate max-w-[150px]">
+                {selectedUser?.name}
+              </h1>
+              <div className="w-6"></div> {/* Spacer for balance */}
+            </>
+          ) : (
+            <>
+              <h1 className="text-xl font-bold text-gray-900">Messages</h1>
+              <div className="w-6"></div> {/* Spacer for balance */}
+            </>
+          )}
+        </div>
+      </div>
+
+      <div className="max-w-6xl mx-auto px-0 sm:px-4 sm:px-6 lg:px-8 pt-0 sm:pt-8">
+        {/* Desktop Header */}
+        <div className="hidden md:block mb-8">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Messages</h1>
+          <p className="text-gray-600 mt-1 sm:mt-2 text-sm sm:text-base">
             {user.role === 'doctor' ? 'Chat with patients' : 'Chat with doctors'}
           </p>
         </div>
 
-        <div className="bg-white rounded-lg shadow-lg h-[600px] flex">
-          {/* Conversations List */}
-          <div className="w-full md:w-1/3 border-r border-gray-200 flex flex-col">
-            <div className="p-4 border-b border-gray-200">
+        <div className="bg-white rounded-none sm:rounded-lg shadow-none sm:shadow-lg h-screen sm:h-[600px] flex">
+          {/* Conversations List - Hidden on mobile when chat is open */}
+          <div className={`
+            w-full md:w-1/3 border-r border-gray-200 flex flex-col
+            ${showChat ? 'hidden md:flex' : 'flex'}
+          `}>
+            <div className="p-3 sm:p-4 border-b border-gray-200">
               {/* Doctor Tabs */}
               {user.role === 'doctor' && (
                 <div className="flex space-x-2 mb-3">
                   <button
-                    onClick={() => setActiveTab('available')}
-                    className={`flex-1 py-2 px-3 text-sm font-medium rounded-lg transition-colors ${
+                    onClick={() => {
+                      setActiveTab('available');
+                      setSelectedUser(null);
+                      handleBackToList();
+                    }}
+                    className={`flex-1 py-2 px-2 sm:px-3 text-xs sm:text-sm font-medium rounded-lg transition-colors ${
                       activeTab === 'available'
                         ? 'bg-blue-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -179,8 +283,12 @@ const Chat = () => {
                     All Patients
                   </button>
                   <button
-                    onClick={() => setActiveTab('patients')}
-                    className={`flex-1 py-2 px-3 text-sm font-medium rounded-lg transition-colors ${
+                    onClick={() => {
+                      setActiveTab('patients');
+                      setSelectedUser(null);
+                      handleBackToList();
+                    }}
+                    className={`flex-1 py-2 px-2 sm:px-3 text-xs sm:text-sm font-medium rounded-lg transition-colors ${
                       activeTab === 'patients'
                         ? 'bg-blue-600 text-white'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -202,16 +310,16 @@ const Chat = () => {
                   }
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm sm:text-base"
                 />
               </div>
             </div>
             
             <div className="flex-1 overflow-y-auto">
               {filteredConversations.length === 0 ? (
-                <div className="text-center py-8">
-                  <Users className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600">
+                <div className="text-center py-8 px-4">
+                  <Users className="w-10 h-10 sm:w-12 sm:h-12 text-gray-400 mx-auto mb-3 sm:mb-4" />
+                  <p className="text-gray-600 text-sm sm:text-base">
                     {user.role === 'doctor' 
                       ? activeTab === 'patients' 
                         ? 'No patients from appointments yet.'
@@ -220,7 +328,7 @@ const Chat = () => {
                     }
                   </p>
                   {user.role === 'doctor' && activeTab === 'patients' && (
-                    <p className="text-sm text-gray-500 mt-2">
+                    <p className="text-xs sm:text-sm text-gray-500 mt-2">
                       Patients will appear here after they book appointments with you.
                     </p>
                   )}
@@ -230,26 +338,31 @@ const Chat = () => {
                   <div
                     key={conversation.id || conversation._id}
                     onClick={() => handleSelectUser(conversation)}
-                    className={`p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-50 ${
-                      selectedUser?.id === (conversation.id || conversation._id) ? 'bg-blue-50' : ''
+                    className={`p-3 sm:p-4 border-b border-gray-200 cursor-pointer hover:bg-gray-50 transition-colors ${
+                      selectedUser?.id === (conversation.id || conversation._id) ? 'bg-blue-50 border-blue-200' : ''
                     }`}
                   >
                     <div className="flex items-center space-x-3">
                       <img
                         src={conversation.profilePicture || '/default-avatar.png'}
                         alt={conversation.name}
-                        className="w-12 h-12 rounded-full"
+                        className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex-shrink-0"
                       />
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between">
-                          <h4 className="font-semibold text-gray-900 truncate">
+                          <h4 className="font-semibold text-gray-900 truncate text-sm sm:text-base">
                             {conversation.name}
                           </h4>
-                          {getRoleBadge(conversation.role)}
+                          <div className="flex items-center space-x-2">
+                            {getRoleBadge(conversation.role)}
+                            <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
+                              conversation.online ? 'bg-green-500' : 'bg-gray-300'
+                            }`} />
+                          </div>
                         </div>
                         <div className="flex items-center space-x-2 mt-1">
                           {getRoleIcon(conversation.role)}
-                          <p className="text-sm text-gray-600 truncate">
+                          <p className="text-xs sm:text-sm text-gray-600 truncate">
                             {conversation.specialization || 'Patient'}
                             {conversation.qualification && ` • ${conversation.qualification}`}
                           </p>
@@ -266,9 +379,6 @@ const Chat = () => {
                           </div>
                         )}
                       </div>
-                      <div className={`w-3 h-3 rounded-full ${
-                        conversation.online ? 'bg-green-500' : 'bg-gray-300'
-                      }`} />
                     </div>
                   </div>
                 ))
@@ -277,20 +387,26 @@ const Chat = () => {
           </div>
 
           {/* Chat Area */}
-          <div className="flex-1 flex flex-col">
+          <div className={`
+            flex-1 flex flex-col
+            ${showChat ? 'flex' : 'hidden md:flex'}
+          `}>
             {selectedUser ? (
-              <ChatWindow receiver={selectedUser} />
+              <ChatWindow 
+                receiver={selectedUser} 
+                onBack={window.innerWidth < 768 ? handleBackToList : undefined}
+              />
             ) : (
-              <div className="flex-1 flex items-center justify-center">
+              <div className="flex-1 flex items-center justify-center p-4">
                 <div className="text-center">
-                  <MessageCircle className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold text-gray-900 mb-2">
+                  <MessageCircle className="w-12 h-12 sm:w-16 sm:h-16 text-gray-400 mx-auto mb-3 sm:mb-4" />
+                  <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">
                     {user.role === 'doctor' 
                       ? 'Select a patient' 
                       : 'Select a doctor'
                     }
                   </h3>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 text-sm sm:text-base">
                     {user.role === 'doctor'
                       ? 'Choose a patient from the list to start chatting'
                       : 'Choose a doctor from the list to start chatting'

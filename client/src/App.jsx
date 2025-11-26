@@ -25,6 +25,7 @@ import AINutritionist from './pages/AINutritionist';
 import AIMentalHealthExpert from './pages/AIMentalHealthExpert';
 import Footer from './components/Layout/Footer';
 import { VideoCallProvider } from './contexts/VideoCallContext';
+
 function App() {
   return (
     <ErrorBoundary>
@@ -32,78 +33,79 @@ function App() {
         <AuthProvider>
           <SocketProvider>
             <VideoCallProvider>
-            <div className="min-h-screen bg-gray-50">
-              <Navbar />
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
-                
-                {/* Patient Routes */}
-                <Route path="/consultation" element={<ProtectedRoute><Consultation /></ProtectedRoute>} />
-                <Route path="/symptom-checker" element={<ProtectedRoute><SymptomChecker /></ProtectedRoute>} />
-                <Route path="/report-analysis" element={<ProtectedRoute><ReportAnalysis /></ProtectedRoute>} />
-                <Route path="/home-remedies" element={<ProtectedRoute><HomeRemedies /></ProtectedRoute>} />
-                <Route path="/chat/:userId?" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
-                <Route path="/delivery" element={<ProtectedRoute><Delivery /></ProtectedRoute>} />
-                <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
-                <Route path="/patient-appointments" element={ <ProtectedRoute><PatientAppointments /></ProtectedRoute>} />
+              <div className="min-h-screen bg-gray-50 flex flex-col">
+                <Navbar />
+                <main className="flex-1 w-full max-w-full overflow-x-hidden">
+                  <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/register" element={<Register />} />
+                    
+                    {/* Patient Routes */}
+                    <Route path="/consultation" element={<ProtectedRoute><Consultation /></ProtectedRoute>} />
+                    <Route path="/symptom-checker" element={<ProtectedRoute><SymptomChecker /></ProtectedRoute>} />
+                    <Route path="/report-analysis" element={<ProtectedRoute><ReportAnalysis /></ProtectedRoute>} />
+                    <Route path="/home-remedies" element={<ProtectedRoute><HomeRemedies /></ProtectedRoute>} />
+                    <Route path="/chat/:userId?" element={<ProtectedRoute><Chat /></ProtectedRoute>} />
+                    <Route path="/delivery" element={<ProtectedRoute><Delivery /></ProtectedRoute>} />
+                    <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
+                    <Route path="/patient-appointments" element={ <ProtectedRoute><PatientAppointments /></ProtectedRoute>} />
 
-                 {/* AI Expert Routes */}
-           {/* AI Expert Routes - Protected */}
-<Route 
-  path="/ai-medical-expert" 
-  element={
-    <ProtectedRoute>
-      <AIMedicalExpert />
-    </ProtectedRoute>
-  } 
-/>
-<Route 
-  path="/ai-ayurvedic-expert" 
-  element={
-    <ProtectedRoute>
-      <AIAyurvedicExpert />
-    </ProtectedRoute>
-  } 
-/>
-<Route 
-  path="/ai-nutritionist" 
-  element={
-    <ProtectedRoute>
-      <AINutritionist />
-    </ProtectedRoute>
-  } 
-/>
-<Route 
-  path="/ai-mental-health-expert" 
-  element={
-    <ProtectedRoute>
-      <AIMentalHealthExpert />
-    </ProtectedRoute>
-  } 
-/>
-                {/* Doctor Routes */}
-                <Route 
-                  path="/doctor-dashboard" 
-                  element={
-                    <ProtectedRoute doctorOnly={true}>
-                      <DoctorDashboard />
-                    </ProtectedRoute>
-                  } 
-                />
-                <Route 
-                  path="/doctor-appointments" 
-                  element={
-                    <ProtectedRoute doctorOnly={true}>
-                      <DoctorAppointments />
-                    </ProtectedRoute>
-                  } 
-                />
-               
-              </Routes>
-              <Footer />
-            </div>
+                    {/* AI Expert Routes */}
+                    <Route 
+                      path="/ai-medical-expert" 
+                      element={
+                        <ProtectedRoute>
+                          <AIMedicalExpert />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/ai-ayurvedic-expert" 
+                      element={
+                        <ProtectedRoute>
+                          <AIAyurvedicExpert />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/ai-nutritionist" 
+                      element={
+                        <ProtectedRoute>
+                          <AINutritionist />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/ai-mental-health-expert" 
+                      element={
+                        <ProtectedRoute>
+                          <AIMentalHealthExpert />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    
+                    {/* Doctor Routes */}
+                    <Route 
+                      path="/doctor-dashboard" 
+                      element={
+                        <ProtectedRoute doctorOnly={true}>
+                          <DoctorDashboard />
+                        </ProtectedRoute>
+                      } 
+                    />
+                    <Route 
+                      path="/doctor-appointments" 
+                      element={
+                        <ProtectedRoute doctorOnly={true}>
+                          <DoctorAppointments />
+                        </ProtectedRoute>
+                      } 
+                    />
+                  </Routes>
+                </main>
+                <Footer />
+              </div>
             </VideoCallProvider>
           </SocketProvider>
         </AuthProvider>

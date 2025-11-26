@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSocket } from '../../contexts/SocketContext';
 import { useAuth } from '../../contexts/AuthContext';
 import { useVideoCall } from '../../contexts/VideoCallContext';
-import { Send, Paperclip, Video, Trash2, MoreVertical } from 'lucide-react';
+import { Send, Paperclip, Video, Trash2, MoreVertical, ArrowLeft } from 'lucide-react';
 import axios from 'axios';
 
 const ChatWindow = ({ receiver, onBack }) => {
@@ -156,16 +156,16 @@ const ChatWindow = ({ receiver, onBack }) => {
 
   if (!isConnected) {
     return (
-      <div className="flex flex-col h-full bg-white rounded-lg shadow-lg items-center justify-center">
+      <div className="flex flex-col h-full bg-white rounded-lg shadow-lg items-center justify-center p-4">
         <div className="text-center">
-          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <Video className="w-8 h-8 text-red-600" />
+          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <Video className="w-6 h-6 sm:w-8 sm:h-8 text-red-600" />
           </div>
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Connection Lost</h3>
-          <p className="text-gray-600 mb-4">Please refresh the page to reconnect</p>
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">Connection Lost</h3>
+          <p className="text-gray-600 mb-4 text-sm sm:text-base">Please refresh the page to reconnect</p>
           <button 
             onClick={() => window.location.reload()}
-            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+            className="bg-blue-600 text-white px-3 sm:px-4 py-2 rounded-lg hover:bg-blue-700 text-sm sm:text-base"
           >
             Refresh Page
           </button>
@@ -176,11 +176,11 @@ const ChatWindow = ({ receiver, onBack }) => {
 
   if (!receiver) {
     return (
-      <div className="flex flex-col h-full bg-white rounded-lg shadow-lg items-center justify-center">
+      <div className="flex flex-col h-full bg-white rounded-lg shadow-lg items-center justify-center p-4">
         <div className="text-center">
-          <Video className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">Select a chat</h3>
-          <p className="text-gray-600">Choose a user to start chatting</p>
+          <Video className="w-12 h-12 sm:w-16 sm:h-16 text-gray-400 mx-auto mb-4" />
+          <h3 className="text-base sm:text-lg font-semibold text-gray-900 mb-2">Select a chat</h3>
+          <p className="text-gray-600 text-sm sm:text-base">Choose a user to start chatting</p>
         </div>
       </div>
     );
@@ -189,51 +189,51 @@ const ChatWindow = ({ receiver, onBack }) => {
   return (
     <div className="flex flex-col h-full bg-white rounded-lg shadow-lg">
       {/* Chat Header */}
-      <div className="bg-blue-600 text-white p-4 rounded-t-lg flex justify-between items-center">
-        <div className="flex items-center space-x-3">
+      <div className="bg-blue-600 text-white p-3 sm:p-4 rounded-t-lg flex justify-between items-center">
+        <div className="flex items-center space-x-2 sm:space-x-3">
           {onBack && (
             <button
               onClick={onBack}
-              className="mr-2 p-1 hover:bg-blue-700 rounded-full transition-colors"
+              className="mr-1 sm:mr-2 p-1 hover:bg-blue-700 rounded-full transition-colors flex-shrink-0"
             >
-              ←
+              <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           )}
           <img
             src={receiver.profilePicture || '/default-avatar.png'}
             alt={receiver.name}
-            className="w-10 h-10 rounded-full"
+            className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex-shrink-0"
           />
-          <div>
-            <h3 className="font-semibold">{receiver.name}</h3>
-            <p className="text-sm opacity-80 capitalize">
+          <div className="min-w-0 flex-1">
+            <h3 className="font-semibold text-sm sm:text-base truncate">{receiver.name}</h3>
+            <p className="text-xs sm:text-sm opacity-80 capitalize truncate">
               {receiver.role} {receiver.specialization && `• ${receiver.specialization}`}
             </p>
           </div>
         </div>
-        <div className="flex items-center space-x-2">
-          <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`} />
+        <div className="flex items-center space-x-1 sm:space-x-2">
+          <div className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`} />
           <button
             onClick={handleVideoCall}
-            className="p-2 hover:bg-blue-700 rounded-full transition-colors"
+            className="p-1 sm:p-2 hover:bg-blue-700 rounded-full transition-colors"
             title="Video Call"
           >
-            <Video className="w-5 h-5" />
+            <Video className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
       </div>
 
       {/* Messages Area */}
-      <div className="flex-1 p-4 overflow-y-auto bg-gray-50">
+      <div className="flex-1 p-3 sm:p-4 overflow-y-auto bg-gray-50">
         {loading ? (
-          <div className="flex justify-center items-center h-20">
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+          <div className="flex justify-center items-center h-16 sm:h-20">
+            <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-600"></div>
           </div>
         ) : messages.length === 0 ? (
           <div className="flex justify-center items-center h-full">
-            <div className="text-center text-gray-500">
+            <div className="text-center text-gray-500 text-sm sm:text-base">
               <p>No messages yet</p>
-              <p className="text-sm">Start a conversation!</p>
+              <p className="text-xs sm:text-sm">Start a conversation!</p>
             </div>
           </div>
         ) : (
@@ -244,11 +244,11 @@ const ChatWindow = ({ receiver, onBack }) => {
                 (message.sender._id === currentUserId || message.sender.id === currentUserId) 
                   ? 'justify-end' 
                   : 'justify-start'
-              } mb-4 group`}
+              } mb-3 sm:mb-4 group`}
             >
-              <div className="relative">
+              <div className="relative max-w-[85%] xs:max-w-xs sm:max-w-md lg:max-w-lg">
                 <div
-                  className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
+                  className={`px-3 py-2 sm:px-4 sm:py-2 rounded-lg ${
                     (message.sender._id === currentUserId || message.sender.id === currentUserId)
                       ? message.deleted 
                         ? 'bg-gray-300 text-gray-500 italic'
@@ -259,29 +259,29 @@ const ChatWindow = ({ receiver, onBack }) => {
                   }`}
                 >
                   {(message.sender._id !== currentUserId && message.sender.id !== currentUserId) && (
-                    <p className="text-xs font-semibold text-gray-600 mb-1">
+                    <p className="text-xs font-semibold text-gray-600 mb-1 truncate">
                       {message.sender.name}
                     </p>
                   )}
                   
                   {message.deleted ? (
-                    <div className="flex items-center space-x-2 text-gray-500">
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                    <div className="flex items-center space-x-2 text-gray-500 text-xs sm:text-sm">
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
                       </svg>
-                      <span className="text-sm italic">This message was deleted</span>
+                      <span className="italic">This message was deleted</span>
                     </div>
                   ) : (
                     <>
-                      <p className="break-words">{message.message}</p>
+                      <p className="break-words text-sm sm:text-base">{message.message}</p>
                       
                       {message.filePath && (
-                        <div className="mt-2">
+                        <div className="mt-1 sm:mt-2">
                           <a
                             href={message.filePath}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-sm underline flex items-center space-x-1"
+                            className="text-xs sm:text-sm underline flex items-center space-x-1"
                           >
                             <Paperclip className="w-3 h-3" />
                             <span>Attachment</span>
@@ -303,7 +303,7 @@ const ChatWindow = ({ receiver, onBack }) => {
 
                 {(message.sender._id === currentUserId || message.sender.id === currentUserId) && 
                  !message.deleted && (
-                  <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <div className="absolute top-0 -right-6 opacity-0 group-hover:opacity-100 transition-opacity">
                     <div className="relative">
                       <button
                         onClick={() => setMenuOpen(menuOpen === message._id ? null : message._id)}
@@ -313,10 +313,10 @@ const ChatWindow = ({ receiver, onBack }) => {
                       </button>
                       
                       {menuOpen === message._id && (
-                        <div className="absolute right-0 mt-1 w-32 bg-white border rounded-lg shadow-lg z-10">
+                        <div className="absolute right-0 mt-1 w-28 bg-white border rounded-lg shadow-lg z-10">
                           <button
                             onClick={() => deleteMessage(message._id)}
-                            className="w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-gray-100 flex items-center space-x-2"
+                            className="w-full text-left px-3 py-2 text-xs text-red-600 hover:bg-gray-100 flex items-center space-x-2"
                           >
                             <Trash2 className="w-3 h-3" />
                             <span>Delete</span>
@@ -334,7 +334,7 @@ const ChatWindow = ({ receiver, onBack }) => {
       </div>
 
       {/* Message Input */}
-      <div className="p-4 border-t bg-white">
+      <div className="p-3 sm:p-4 border-t bg-white">
         <div className="flex space-x-2">
           <input
             type="text"
@@ -342,15 +342,15 @@ const ChatWindow = ({ receiver, onBack }) => {
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && sendMessage()}
             placeholder="Type a message..."
-            className="flex-1 border rounded-full px-4 py-2 focus:outline-none focus:border-blue-500"
+            className="flex-1 border rounded-full px-3 sm:px-4 py-2 text-sm sm:text-base focus:outline-none focus:border-blue-500"
             disabled={!isConnected}
           />
           <button
             onClick={sendMessage}
             disabled={!newMessage.trim() || !isConnected}
-            className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-shrink-0"
           >
-            <Send className="w-5 h-5" />
+            <Send className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
       </div>

@@ -100,25 +100,25 @@ const AIExpertChat = ({ expertConfig }) => {
   const navigationItems = [
     {
       path: '/ai-medical-expert',
-      icon: <Stethoscope className="w-6 h-6" />,
+      icon: <Stethoscope className="w-5 h-5 sm:w-6 sm:h-6" />,
       label: 'Medical',
       expertType: 'medical'
     },
     {
       path: '/ai-ayurvedic-expert',
-         icon: <Leaf className="w-6 h-6" />,
-        label: 'Ayurvedic',
+      icon: <Leaf className="w-5 h-5 sm:w-6 sm:h-6" />,
+      label: 'Ayurvedic',
       expertType: 'ayurvedic'
     },
     {
       path: '/ai-nutritionist',
-     icon: <Utensils className="w-6 h-6" />,
+      icon: <Utensils className="w-5 h-5 sm:w-6 sm:h-6" />,
       label: 'Nutrition',
       expertType: 'nutrition'
     },
     {
       path: '/ai-mental-health-expert',
-      icon: <Brain className="w-6 h-6" />,
+      icon: <Brain className="w-5 h-5 sm:w-6 sm:h-6" />,
       label: 'Mental Health',
       expertType: 'mental_health'
     }
@@ -177,29 +177,29 @@ const AIExpertChat = ({ expertConfig }) => {
   return (
     <div className={`min-h-screen bg-gradient-to-b ${getGradient(colorScheme)} flex flex-col`}>
       {/* Header */}
-      <div className={`${getBgColor(colorScheme)} text-white p-4 shadow-lg`}>
+      <div className={`${getBgColor(colorScheme)} text-white p-3 sm:p-4 shadow-lg`}>
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
-            <Link to="/" className={`p-2 ${getHoverBgColor(colorScheme)} rounded-full transition-colors`}>
-              <ArrowLeft className="w-6 h-6" />
+          <div className="flex items-center space-x-2 sm:space-x-4">
+            <Link to="/" className={`p-1 sm:p-2 ${getHoverBgColor(colorScheme)} rounded-full transition-colors`}>
+              <ArrowLeft className="w-5 h-5 sm:w-6 sm:h-6" />
             </Link>
-            <div className="flex items-center space-x-3">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-                <span className="text-2xl">{icon}</span>
+            <div className="flex items-center space-x-2 sm:space-x-3">
+              <div className="w-8 h-8 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center">
+                <span className="text-lg sm:text-2xl">{icon}</span>
               </div>
-              <div>
-                <h1 className="text-xl font-semibold">{name}</h1>
-                <p className="text-white/80 text-sm">{description}</p>
+              <div className="max-w-[140px] sm:max-w-none">
+                <h1 className="text-base sm:text-xl font-semibold truncate">{name}</h1>
+                <p className="text-white/80 text-xs sm:text-sm truncate">{description}</p>
               </div>
             </div>
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-1 sm:space-x-2">
             <button
               onClick={clearChat}
-              className={`p-2 ${getHoverBgColor(colorScheme)} rounded-full transition-colors`}
+              className={`p-1 sm:p-2 ${getHoverBgColor(colorScheme)} rounded-full transition-colors`}
               title="Clear Chat"
             >
-              <RotateCcw className="w-5 h-5" />
+              <RotateCcw className="w-4 h-4 sm:w-5 sm:h-5" />
             </button>
           </div>
         </div>
@@ -208,27 +208,27 @@ const AIExpertChat = ({ expertConfig }) => {
       {/* Chat Container */}
       <div 
         ref={chatContainerRef}
-        className="flex-1 overflow-y-auto p-4 space-y-4 bg-cover bg-center bg-fixed"
+        className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4 bg-cover bg-center bg-fixed"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%234a90e2' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E")`
         }}
       >
         {messages.length === 0 && (
-          <div className="text-center max-w-2xl mx-auto mt-8 bg-white/80 backdrop-blur-sm rounded-xl p-8 shadow-lg">
-            <div className={`w-20 h-20 ${getLightBgColor(colorScheme)} rounded-full flex items-center justify-center mx-auto mb-4`}>
-              <span className="text-3xl">{icon}</span>
+          <div className="text-center max-w-2xl mx-auto mt-4 sm:mt-8 bg-white/80 backdrop-blur-sm rounded-xl p-4 sm:p-8 shadow-lg">
+            <div className={`w-12 h-12 sm:w-20 sm:h-20 ${getLightBgColor(colorScheme)} rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4`}>
+              <span className="text-xl sm:text-3xl">{icon}</span>
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-2">{name}</h2>
-            <p className="text-gray-600 mb-6">
+            <h2 className="text-lg sm:text-2xl font-bold text-gray-900 mb-2">{name}</h2>
+            <p className="text-gray-600 text-sm sm:text-base mb-4 sm:mb-6">
               {expertConfig.welcomeMessage}
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-6">
+            <div className="grid grid-cols-1 gap-2 sm:gap-3 mt-4 sm:mt-6">
               {quickSuggestions.map((suggestion, index) => (
                 <button
                   key={index}
                   onClick={() => setInputMessage(suggestion)}
-                  className={`${getLightBgColor(colorScheme)} ${getTextColor(colorScheme)} px-4 py-3 rounded-lg text-sm hover:opacity-80 transition-colors text-left`}
+                  className={`${getLightBgColor(colorScheme)} ${getTextColor(colorScheme)} px-3 py-2 sm:px-4 sm:py-3 rounded-lg text-xs sm:text-sm hover:opacity-80 transition-colors text-left`}
                 >
                   {suggestion}
                 </button>
@@ -243,15 +243,15 @@ const AIExpertChat = ({ expertConfig }) => {
             className={`flex ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
           >
             <div
-              className={`max-w-xs md:max-w-md lg:max-w-lg px-4 py-3 rounded-2xl ${
+              className={`max-w-[85%] xs:max-w-xs sm:max-w-md lg:max-w-lg px-3 py-2 sm:px-4 sm:py-3 rounded-2xl ${
                 message.sender === 'user'
                   ? `${getBgColor(colorScheme)} text-white rounded-br-none`
                   : 'bg-white text-gray-800 shadow-md rounded-bl-none border border-gray-100'
               }`}
             >
-              <div className="message-content">
-  <MarkdownRenderer content={message.content} />
-</div>
+              <div className="message-content text-sm sm:text-base">
+                <MarkdownRenderer content={message.content} />
+              </div>
               <p className={`text-xs mt-1 ${
                 message.sender === 'user' ? 'text-white/80' : 'text-gray-500'
               }`}>
@@ -263,7 +263,7 @@ const AIExpertChat = ({ expertConfig }) => {
 
         {isTyping && (
           <div className="flex justify-start">
-            <div className="bg-white text-gray-800 px-4 py-3 rounded-2xl rounded-bl-none shadow-md border border-gray-100">
+            <div className="bg-white text-gray-800 px-3 py-2 sm:px-4 sm:py-3 rounded-2xl rounded-bl-none shadow-md border border-gray-100 max-w-[85%] xs:max-w-xs">
               <div className="flex space-x-1">
                 <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
                 <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
@@ -275,40 +275,40 @@ const AIExpertChat = ({ expertConfig }) => {
       </div>
 
       {/* Input Area */}
-      <div className="bg-white border-t border-gray-200 p-4">
-        <div className="flex space-x-3 max-w-4xl mx-auto">
+      <div className="bg-white border-t border-gray-200 p-3 sm:p-4">
+        <div className="flex space-x-2 sm:space-x-3 max-w-4xl mx-auto">
           <input
             type="text"
             value={inputMessage}
             onChange={(e) => setInputMessage(e.target.value)}
             onKeyPress={handleKeyPress}
             placeholder="Type your question..."
-            className="flex-1 border border-gray-300 rounded-full px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="flex-1 border border-gray-300 rounded-full px-3 sm:px-4 py-2 sm:py-3 text-sm sm:text-base focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
           <button
             onClick={sendMessage}
             disabled={!inputMessage.trim() || isTyping}
-            className={`${getBgColor(colorScheme)} text-white w-12 h-12 rounded-full flex items-center justify-center ${getHoverBgColor(colorScheme)} disabled:opacity-50 disabled:cursor-not-allowed transition-colors`}
+            className={`${getBgColor(colorScheme)} text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center ${getHoverBgColor(colorScheme)} disabled:opacity-50 disabled:cursor-not-allowed transition-colors`}
           >
-            <Send className="w-5 h-5" />
+            <Send className="w-4 h-4 sm:w-5 sm:h-5" />
           </button>
         </div>
       </div>
 
       {/* Bottom Navigation */}
       <div className="bg-white border-t border-gray-200">
-        <div className="flex justify-around py-3 max-w-4xl mx-auto">
+        <div className="flex justify-around py-2 sm:py-3 max-w-4xl mx-auto">
           {navigationItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
-              className={`flex flex-col items-center px-4 py-2 rounded-lg transition-colors ${
+              className={`flex flex-col items-center px-2 sm:px-4 py-1 sm:py-2 rounded-lg transition-colors ${
                 route === item.path
                   ? `${getLightBgColor(colorScheme)} ${getTextColor(colorScheme)}`
                   : 'text-gray-600 hover:bg-gray-100'
               }`}
             >
-              <span className="text-lg">{item.icon}</span>
+              <span className="text-sm sm:text-lg">{item.icon}</span>
               <span className="text-xs font-medium mt-1">{item.label}</span>
             </Link>
           ))}

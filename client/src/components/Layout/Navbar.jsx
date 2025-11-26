@@ -91,13 +91,13 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between h-14 sm:h-16">
           {/* Logo and main navigation */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center space-x-2 ml-5">
-              <Stethoscope className="h-8 w-8 text-blue-600" />
-              <span className="font-bold text-xl text-gray-900">MediMapper</span>
+            <Link to="/" className="flex items-center space-x-2 ml-2 sm:ml-5">
+              <Stethoscope className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+              <span className="font-bold text-lg sm:text-xl text-gray-900">MediMapper</span>
             </Link>
             
             {/* Desktop navigation */}
@@ -110,13 +110,13 @@ const Navbar = () => {
                     key={item.name}
                     to={item.href}
                     onClick={() => handleNavClick(item.href)}
-                    className={`inline-flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    className={`inline-flex items-center px-2 sm:px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       isActive
                         ? 'bg-blue-100 text-blue-700'
                         : 'text-gray-700 hover:bg-gray-100'
                     }`}
                   >
-                    <Icon className="h-4 w-4 mr-2" />
+                    <Icon className="h-4 w-4 mr-1 sm:mr-2" />
                     {item.name}
                   </Link>
                 );
@@ -125,19 +125,19 @@ const Navbar = () => {
           </div>
 
           {/* User menu */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4">
             {user ? (
               <>
                 <Link
                   to="/profile"
-                  className="hidden md:flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
+                  className="hidden md:flex items-center space-x-2 px-2 sm:px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
                 >
                   <User className="h-4 w-4" />
                   <span>Profile</span>
                 </Link>
                 <button
                   onClick={handleLogout}
-                  className="hidden md:flex items-center space-x-2 px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
+                  className="hidden md:flex items-center space-x-2 px-2 sm:px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
                 >
                   <LogOut className="h-4 w-4" />
                   <span>Logout</span>
@@ -147,13 +147,13 @@ const Navbar = () => {
               <div className="hidden md:flex space-x-2">
                 <Link
                   to="/login"
-                  className="px-4 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
+                  className="px-3 sm:px-4 py-2 rounded-md text-sm font-medium text-gray-700 hover:bg-gray-100"
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="px-4 py-2 rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
+                  className="px-3 sm:px-4 py-2 rounded-md text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
                 >
                   Register
                 </Link>
@@ -165,7 +165,7 @@ const Navbar = () => {
               onClick={() => setIsOpen(!isOpen)}
               className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:bg-gray-100"
             >
-              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {isOpen ? <X className="h-5 w-5 sm:h-6 sm:w-6" /> : <Menu className="h-5 w-5 sm:h-6 sm:w-6" />}
             </button>
           </div>
         </div>
@@ -182,7 +182,7 @@ const Navbar = () => {
                     key={item.name}
                     to={item.href}
                     onClick={() => handleNavClick(item.href, true)}
-                    className={`flex items-center px-3 py-2 rounded-md text-base font-medium ${
+                    className={`flex items-center px-3 py-3 rounded-md text-base font-medium ${
                       isActive
                         ? 'bg-blue-100 text-blue-700'
                         : 'text-gray-700 hover:bg-gray-100'
@@ -199,14 +199,14 @@ const Navbar = () => {
                   <Link
                     to="/profile"
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                    className="flex items-center px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
                   >
                     <User className="h-5 w-5 mr-3" />
                     Profile
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="flex items-center w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                    className="flex items-center w-full text-left px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
                   >
                     <LogOut className="h-5 w-5 mr-3" />
                     Logout
@@ -217,14 +217,14 @@ const Navbar = () => {
                   <Link
                     to="/login"
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+                    className="flex items-center px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
                   >
                     Login
                   </Link>
                   <Link
                     to="/register"
                     onClick={() => setIsOpen(false)}
-                    className="flex items-center px-3 py-2 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
+                    className="flex items-center px-3 py-3 rounded-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700"
                   >
                     Register
                   </Link>

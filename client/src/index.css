@@ -27,3 +27,84 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: #a8a8a8;
 }
+
+/* Mobile Responsive Improvements */
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+/* Prevent horizontal scroll */
+* {
+  box-sizing: border-box;
+}
+
+/* Improve touch targets on mobile */
+@media (max-width: 768px) {
+  button, 
+  a, 
+  input, 
+  select, 
+  textarea {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Better text rendering on mobile */
+@media (max-width: 768px) {
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+/* Video Call Mobile Optimizations */
+@media (max-width: 768px) {
+  /* Improve video rendering on mobile */
+  video {
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    object-fit: cover;
+  }
+  
+  /* Prevent zoom on double-tap */
+  * {
+    touch-action: manipulation;
+  }
+  
+  /* Improve button touch targets */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* Fullscreen video call optimizations */
+:fullscreen video {
+  object-fit: contain !important;
+}
+
+:-webkit-full-screen video {
+  object-fit: contain !important;
+}
+
+:-moz-full-screen video {
+  object-fit: contain !important;
+}
+
+/* Prevent body scroll when video call is active */
+body.video-call-active {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
