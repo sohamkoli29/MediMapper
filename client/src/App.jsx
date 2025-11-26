@@ -24,13 +24,14 @@ import AIAyurvedicExpert from './pages/AIAyurvedicExpert';
 import AINutritionist from './pages/AINutritionist';
 import AIMentalHealthExpert from './pages/AIMentalHealthExpert';
 import Footer from './components/Layout/Footer';
-
+import { VideoCallProvider } from './contexts/VideoCallContext';
 function App() {
   return (
     <ErrorBoundary>
       <Router>
         <AuthProvider>
           <SocketProvider>
+            <VideoCallProvider>
             <div className="min-h-screen bg-gray-50">
               <Navbar />
               <Routes>
@@ -103,6 +104,7 @@ function App() {
               </Routes>
               <Footer />
             </div>
+            </VideoCallProvider>
           </SocketProvider>
         </AuthProvider>
       </Router>

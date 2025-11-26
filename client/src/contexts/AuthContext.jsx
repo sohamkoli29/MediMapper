@@ -27,16 +27,32 @@ export const AuthProvider = ({ children }) => {
     }
   }, [token]);
 
-  const verifyToken = async () => {
-    try {
-      // In a real app, you'd verify the token with the backend
-      // For now, we'll just set loading to false
+ const verifyToken = async () => {
+  try {
+    if (!token) {
       setLoading(false);
-    } catch (error) {
-      console.error('Token verification failed:', error);
-      logout();
+      return;
     }
-  };
+
+    // Verify token with backend
+    const response = await axios.get(`${API_BASE_URL}/api/auth/verify-token`, {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
+    if (response.data.success) {
+      setUser(response.data.user);
+    } else {
+      throw new Error('Invalid token');
+    }
+  } catch (error) {
+    console.error('Token verification failed:', error);
+    logout();
+  } finally {
+    setLoading(false);
+  }
+};
 
 // In client/src/contexts/AuthContext.jsx - Update the login function
 const login = async (username, password) => {  // Remove role parameter

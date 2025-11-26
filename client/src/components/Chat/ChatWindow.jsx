@@ -1,7 +1,8 @@
-// client/src/components/Chat/ChatWindow.jsx
+// client/src/components/Chat/ChatWindow.jsx - SIMPLIFIED (uses VideoCallContext)
 import React, { useState, useEffect, useRef } from 'react';
 import { useSocket } from '../../contexts/SocketContext';
 import { useAuth } from '../../contexts/AuthContext';
+import { useVideoCall } from '../../contexts/VideoCallContext';
 import { Send, Paperclip, Video, Trash2, MoreVertical } from 'lucide-react';
 import axios from 'axios';
 
@@ -11,16 +12,16 @@ const ChatWindow = ({ receiver, onBack }) => {
   const [menuOpen, setMenuOpen] = useState(null);
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
+  
   const { socket, isConnected } = useSocket();
   const { user } = useAuth();
+  const { initiateCall } = useVideoCall();
   const messagesEndRef = useRef(null);
 
-  // Ensure we have proper IDs
   const currentUserId = user?.id || user?._id;
   const receiverId = receiver?.id || receiver?._id;
-
-
   const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
+
   useEffect(() => {
     if (socket && receiver && user && currentUserId && receiverId) {
       const chatId = getChatId(currentUserId, receiverId);
@@ -33,7 +34,6 @@ const ChatWindow = ({ receiver, onBack }) => {
       
       const handleNewMessage = (message) => {
         setMessages(prev => {
-          // Check if message already exists to avoid duplicates
           const exists = prev.some(msg => msg._id === message._id);
           if (exists) return prev;
           return [...prev, message];
@@ -42,7 +42,6 @@ const ChatWindow = ({ receiver, onBack }) => {
 
       const handleMessageSent = (message) => {
         setMessages(prev => {
-          // Check if message already exists to avoid duplicates
           const exists = prev.some(msg => msg._id === message._id);
           if (exists) return prev;
           return [...prev, message];
@@ -70,6 +69,10 @@ const ChatWindow = ({ receiver, onBack }) => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const getChatId = (userId1, userId2) => {
     return [userId1, userId2].sort().join('_');
@@ -117,8 +120,6 @@ const ChatWindow = ({ receiver, onBack }) => {
       };
       
       socket.emit('send_message', messageData);
-      
-      // Clear input immediately
       setNewMessage('');
       setFile(null);
       
@@ -142,21 +143,14 @@ const ChatWindow = ({ receiver, onBack }) => {
     }
   };
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const handleVideoCall = () => {
+    initiateCall(receiver);
   };
 
-  const initiateVideoCall = () => {
-    alert('Video call feature will be implemented soon!');
-  };
-
-  // Generate unique key for each message
   const getMessageKey = (message, index) => {
-    // Use _id if available, otherwise create a composite key
     if (message._id && message._id !== 'undefined') {
       return message._id;
     }
-    // Create a unique key using timestamp and index
     return `msg-${message.timestamp}-${index}-${Math.random().toString(36).substr(2, 9)}`;
   };
 
@@ -220,7 +214,7 @@ const ChatWindow = ({ receiver, onBack }) => {
         <div className="flex items-center space-x-2">
           <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`} />
           <button
-            onClick={initiateVideoCall}
+            onClick={handleVideoCall}
             className="p-2 hover:bg-blue-700 rounded-full transition-colors"
             title="Video Call"
           >
@@ -264,14 +258,12 @@ const ChatWindow = ({ receiver, onBack }) => {
                         : 'bg-white text-gray-800 border'
                   }`}
                 >
-                  {/* Show sender name for received messages */}
                   {(message.sender._id !== currentUserId && message.sender.id !== currentUserId) && (
                     <p className="text-xs font-semibold text-gray-600 mb-1">
                       {message.sender.name}
                     </p>
                   )}
                   
-                  {/* Deleted message display */}
                   {message.deleted ? (
                     <div className="flex items-center space-x-2 text-gray-500">
                       <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -280,7 +272,6 @@ const ChatWindow = ({ receiver, onBack }) => {
                       <span className="text-sm italic">This message was deleted</span>
                     </div>
                   ) : (
-                    /* Normal message display */
                     <>
                       <p className="break-words">{message.message}</p>
                       
@@ -300,7 +291,6 @@ const ChatWindow = ({ receiver, onBack }) => {
                     </>
                   )}
                   
-                  {/* Message timestamp */}
                   <p className={`text-xs opacity-70 mt-1 text-right ${
                     message.deleted ? 'text-gray-400' : ''
                   }`}>
@@ -311,7 +301,6 @@ const ChatWindow = ({ receiver, onBack }) => {
                   </p>
                 </div>
 
-                {/* Message Actions Menu - Only show for non-deleted messages sent by current user */}
                 {(message.sender._id === currentUserId || message.sender.id === currentUserId) && 
                  !message.deleted && (
                   <div className="absolute top-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity">

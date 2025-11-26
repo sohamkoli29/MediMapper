@@ -178,5 +178,55 @@ router.post('/login', async (req, res) => {
     });
   }
 });
+router.get('/verify-token', async (req, res) => {
+  try {
+    const token = req.headers.authorization?.replace('Bearer ', '');
+    
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: 'No token provided'
+      });
+    }
 
+    // Verify token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    // Get user data
+    const user = await User.findById(decoded.userId).select('-password');
+    if (!user) {
+      return res.status(401).json({
+        success: false,
+        message: 'User not found'
+      });
+    }
+
+    // Update online status
+    user.online = true;
+    user.lastActive = new Date();
+    await user.save();
+
+    const userResponse = {
+      id: user._id,
+      username: user.username,
+      role: user.role,
+      name: user.name,
+      email: user.email,
+      profilePicture: user.profilePicture,
+      online: user.online
+    };
+
+    res.json({
+      success: true,
+      user: userResponse
+    });
+
+  } catch (error) {
+    console.error('Token verification error:', error);
+    res.status(401).json({
+      success: false,
+      message: 'Invalid or expired token'
+    });
+  }
+});
 export default router;
