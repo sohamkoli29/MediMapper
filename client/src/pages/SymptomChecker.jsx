@@ -181,33 +181,13 @@ const SymptomChecker = () => {
               <p className="text-gray-700">{predictions.symptoms}</p>
             </div>
 
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
-              <div className="flex items-start space-x-3">
-                <AlertCircle className="w-6 h-6 text-yellow-600 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-yellow-800 mb-2">Important Notice</h4>
-                  <p className="text-yellow-700 text-sm">
-                    This is an AI-powered analysis for informational purposes only. 
-                    It is not a substitute for professional medical advice, diagnosis, or treatment. 
-                    Always consult with a qualified healthcare provider for medical concerns.
-                  </p>
-                </div>
-              </div>
-            </div>
+       
 
             <div className="prose max-w-none">
              <MarkdownRenderer content={predictions.analysis} />
             </div>
 
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-              <h4 className="font-semibold text-blue-900 mb-2">Recommended Next Steps:</h4>
-              <ul className="text-blue-800 space-y-1">
-                <li>• Consult with a healthcare professional for accurate diagnosis</li>
-                <li>• Monitor your symptoms and note any changes</li>
-                <li>• Follow prescribed medications and treatments</li>
-                <li>• Maintain a healthy lifestyle and diet</li>
-              </ul>
-            </div>
+          
           </div>
         )}
 

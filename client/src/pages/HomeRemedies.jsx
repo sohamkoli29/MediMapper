@@ -130,19 +130,7 @@ const HomeRemedies = () => {
           <div className="bg-white rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Ayurvedic Remedies</h2>
             
-            <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-              <div className="flex items-start space-x-3">
-                <AlertCircle className="w-6 h-6 text-yellow-600 mt-0.5 flex-shrink-0" />
-                <div>
-                  <h4 className="font-semibold text-yellow-800 mb-2">Important Notice</h4>
-                  <p className="text-yellow-700 text-sm">
-                    These are traditional Ayurvedic remedies for informational purposes. 
-                    Consult with a healthcare professional before trying any new remedies, 
-                    especially if you have existing health conditions or are taking medications.
-                  </p>
-                </div>
-              </div>
-            </div>
+          
 
             <div className="prose max-w-none">
           
